@@ -4,11 +4,14 @@ import { useForm } from 'react-hook-form';
 import { Eye, EyeOff } from 'lucide-react';
 
 export default function CodeConfirmation () {
-    const [showCode, setShowCode] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
     const [isLoading, setIsLoading] = useState(false);
 
     const {
-        handleSubmit
+        register,
+        handleSubmit,
+        formState: { errors }
     } = useForm();
 
     const onSubmit = async(data) => {
@@ -41,6 +44,7 @@ export default function CodeConfirmation () {
                             <input
                                 type='text'
                                 className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500'
+                                {...register('code')}
                             />
                             {errors.code && (
                                 <p className='mt-1 text-sm text-red-600'>
@@ -48,7 +52,7 @@ export default function CodeConfirmation () {
                                 </p>
                             )}
                         </div>
-                        <div className='mt-6 grid grid-cols-2 gap-3'>
+                        <div className='mt-6 grid grid-cols-2 gap-3 justify-center'>
                             <button 
                                 type='button'
                                 className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outlien'>
