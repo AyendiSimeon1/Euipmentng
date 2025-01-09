@@ -34,7 +34,7 @@ function SignupConfirmation() {
         ;
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8",
+        className: "min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "sm:mx-auto sm:w-full sm:max-w-md",
@@ -48,6 +48,7 @@ function SignupConfirmation() {
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-center font-medium pt-2 mt-2",
                         children: "A code has been sent to your email, input it to complete your registration"
                     }, void 0, false, {
                         fileName: "[project]/src/components/auth/signupConfirmation.js",
@@ -98,7 +99,7 @@ function SignupConfirmation() {
                                 type: "submit",
                                 disabled: isLoading,
                                 className: "w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50",
-                                children: isLoading ? 'Signing in...' : 'Login'
+                                children: isLoading ? 'Loading...' : 'Contine'
                             }, void 0, false, {
                                 fileName: "[project]/src/components/auth/signupConfirmation.js",
                                 lineNumber: 51,

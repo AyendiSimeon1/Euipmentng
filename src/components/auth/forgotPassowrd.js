@@ -23,7 +23,7 @@ export default function CodeConfirmation () {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
                    Forgot Password
@@ -31,16 +31,14 @@ export default function CodeConfirmation () {
                 <p className="text-center text-gray-600 mt-4">Please input your email to recover your password</p>
             </div>
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className='bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10'>
+                <div className='bg-white py-8 px-4  sm:rounded-lg sm:px-10'>
                     <form className='space-y-6' onSubmit={handleSubmit(onSubmit)}>
                         <div>
-                            <label
-                                htmlFor='Email'
-                                className='block text-sm font-medium text-gray-700'
-                            />
+                        
                             <input
                                 type='text'
                                 className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500'
+                                placeholder='Code'
                             />
                             {errors.email && (
                                 <p className='mt-1 text-sm text-red-600'>

@@ -25,12 +25,12 @@ export default function SignupConfirmation() {
 
     };
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h1 className='text-center text-3xl font-bold tracking-tight text-gray-900'>
                     Check your email for code
                 </h1>
-                <p>A code has been sent to your email, input it to complete your registration</p>
+                <p className='text-center font-medium pt-2 mt-2'>A code has been sent to your email, input it to complete your registration</p>
             </div>
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className='bg-white py-8 px-4 sm:rounded-lg sm:px-10'>
@@ -53,7 +53,7 @@ export default function SignupConfirmation() {
                             disabled={isLoading}
                             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
                         >
-                            {isLoading ? 'Signing in...' : 'Login'}
+                            {isLoading ? 'Loading...' : 'Contine'}
                         </button>
 
                     </form>
