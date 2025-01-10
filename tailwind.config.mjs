@@ -7,6 +7,10 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundColor: {
+        'secondary': '#FFA000', // Add your custom color with a name
+        'primary': '#FBC02D',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -14,7 +18,7 @@ export default {
         'secondary': '#FED639', // Example secondary color
         'accent': '#F59E0B', // Example accent color
         'background': '#F3F4F6', // Example background color
-        'text-primary': '#1F2937', // Example text color
+        'text-primary': '#FFFACD', // Example text color
         'text-secondary': '#6B7280', 
         'background-primary': '#F3F4F6', // Light gray
         'background-secondary': '#FFFFFF', // White
