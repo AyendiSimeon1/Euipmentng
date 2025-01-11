@@ -1,11 +1,15 @@
 import Image from 'next/image';
 import EquipmentInfo from './EquipmentInfo';
 import { FaCheckCircle } from 'react-icons/fa'; 
+import { BookmarkCheckIcon } from 'lucide-react';
 export default function SavedEquipmentComponent({ savedItems }) {
   return (
     <div className="space-y-6">
       {savedItems.map((item, index) => (
-        <div key={index} className="flex items-center justify-between bg-white p-4 rounded-lg shadow-lg">
+        <div key={index} className="relative bg-white p-4 rounded-lg shadow-lg">
+      
+        <BookmarkCheckIcon className="absolute top-2 right-2 text-yellow-500 text-xl" />
+        
           <div className="flex items-center">
             <Image 
               src={item.image} 
@@ -14,8 +18,8 @@ export default function SavedEquipmentComponent({ savedItems }) {
               className="rounded-lg object-cover" 
               alt={item.title} 
             />
-            <div className="ml-4">
-              <h2 className="text-xl font-medium">{item.title}</h2>
+            <div className="ml-4 ">
+              <h2 className="text-xl font-medium mt-2">{item.title}</h2>
               <p className="text-sm text-gray-600">{item.location}</p>
               <br />
               <h2 className="text-xl text-gray-600">Cost</h2>
@@ -24,7 +28,6 @@ export default function SavedEquipmentComponent({ savedItems }) {
               <EquipmentInfo make='202' year='200' location='port harcut' brand='model' color='pin' />
             </div>
           </div>
-          <FaCheckCircle className="text-green-500 text-2xl" /> {/* Icon at the flex end */}
         </div>
       ))}
     </div>
