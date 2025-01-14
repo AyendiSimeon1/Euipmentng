@@ -5,7 +5,7 @@ import Profile from '@/components/settings/profile';
 import InputField from '@/components/settings/InputField'
 import Layout from '@/components/settings/layout';
 import CompanyDetails from '@/components/settings/CompanyDetails';
-
+import ChangePassword from '@/components/settings/ChangePassword';
 
 export default function SettingsPage () {
     const [currentRoute, setCurrentRoute] = useState('profile');
@@ -16,6 +16,8 @@ export default function SettingsPage () {
                 return <Profile />;
             case 'company-details':
                 return <CompanyDetails />
+            case 'change-password':
+                return <ChangePassword />
             default:
                 return <Profile />;
         }

@@ -1,21 +1,28 @@
 import Image from 'next/image';
 import React from 'react';
+import { BookMarkedIcon, BookmarkPlus, CircleUserRound  } from 'lucide-react';
 
-const Header = () => {
+export default function Header ()  {
     return (
-        <header className=" bg-secondary  p-4">
-            <div className="flex items-center  justify-between">
-                <div className=" text-2xl">Equipment.ng</div>
-                <div className="flex items-center space-x-4">
-                    <button className="bg-primary rounded-full text-yellow-700 px-4 py-2 rounded">Button 1</button>
-                    <button className="bg-primary rounded-full text-yellow-700 px-1 py-1 rounded">
-                        <Image className='rounded-full' src="/future.jpeg" alt="heart" width={50} height={50} />
-                    </button>
-                    <div className="text-white text-2xl">👤</div>
+        <header className="bg-[#2A2F38] px-6 py-3 flex justify-between items-center">
+        <div className="flex items-center space-x-2">
+            <span className="text-yellow-500 text-2xl">⚙️</span>
+            <span className="text-white font-semibold">Equipment.ng</span>
+        </div>
+        <div className="flex items-center space-x-4">
+            <button className="text-white bg-gray-700 px-4 py-1.5 rounded-md text-sm">
+                Complete Profile
+            </button>
+            <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gray-700 rounded-md flex items-center justify-center">
+                    <span className="text-white"><BookmarkPlus /> </span>
+                </div>
+                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm"><CircleUserRound /></span>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
     );
 };
 
-export default Header;

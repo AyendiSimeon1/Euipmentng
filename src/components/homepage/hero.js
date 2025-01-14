@@ -1,17 +1,23 @@
 import Card from '@/components/ui/cards/HomepageCard'
-
+import { SearchIcon } from 'lucide-react'
 export default function Hero() {
     return (
         <div>
-            <div className="flex items-center justify-center bg-yellow-600 ">
+            <div className="flex items-center justify-center bg-gray-900  ">
                 <div className="px-6 py-10 mx-3 max-w-4xl text-center">
                     <p className="text-3xl font-bold text-white mb-6">Hire all types of equipments</p>
-                    <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
-                        <input 
+                    <div className="relative ">
+                    <input 
                             type="text" 
                             placeholder="Search Equipments" 
-                            className="p-3 rounded border border-gray-300 w-full md:w-auto"
+                            className="p-3 m-3 rounded border border-gray-300 w-full md:w-auto"
                         />
+                        <button className='absolute left-3 top-1/2' >
+                            <SearchIcon  />
+                        </button>
+                    </div>
+                    <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                        
                         <select className="p-3 rounded border border-gray-300 w-full md:w-auto">
                             <option value="">Location</option>
                             <option value="new-york">New York</option>
