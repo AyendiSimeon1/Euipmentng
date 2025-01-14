@@ -17,36 +17,25 @@ export default function CompanyDetails () {
             <div className='max-w-2xl'>
             <form className="space-y-4">
                     <input
-                        {...register('surname')}
+                        {...register('name')}
                         type='text'
-                        placeholder='Surname'
-                        className='mt-1 block w-full rounded-md border border-gray-600 px-3 py-2 shadow-sm focus:border-yellow-500 focus: outline-none focus: ring-yellow-500'
+                        placeholder='Name of Company'
+                        className='mt-2 block w-full rounded-md border border-gray-600 px-3 py-2 shadow-sm focus:border-yellow-500 focus: outline-none focus: ring-yellow-500'
                     />
-                    {errors.surname && (
-                        <p className='mt-1 text-sm text-red-600'>
-                            {errors.surname.message}
+                    {errors.name && (
+                        <p className='mt-2 text-sm text-red-600'>
+                            {errors.name.message}
                         </p>
                     )}
                     <input
-                        {...register('firstname')}
+                        {...register('address')}
                         type='text'
-                        placeholder='First name'
-                        className='mt-1 block w-full rounded-md border border-gray-500 px-3 py-2 shadow-sm focus:border-yellow-500 focus: outline-none focus: ring-yellow-500'
+                        placeholder='Address'
+                        className='mt-2 block w-full rounded-md border border-gray-500 px-3 py-2 shadow-sm focus:border-yellow-500 focus: outline-none focus: ring-yellow-500'
                     />
-                    {errors.firstname && (
+                    {errors.address && (
                         <p className='mt-1 text-sm text-red-600'>
-                            {erros.firstname.message}
-                        </p>
-                    )}
-                    <input
-                        {...register('phonenumber')}
-                        type='number'
-                        placeholder='Phone Number'
-                        className='mt-1 block w-full rounded-md border border-gray-500 px-3 py-2 shadow-sm focus:border-yellow-500 focus: outline-none focus: ring-yellow-500'
-                    />
-                    {errors.phonenumber && (
-                        <p className='text-sm mt-1 text-red-600'>
-                            {errors.phonenumber.message}
+                            {erros.address.message}
                         </p>
                     )}
                     <input
@@ -60,6 +49,18 @@ export default function CompanyDetails () {
                             {errors.email.message}
                         </p>
                     )}
+                    <input
+                        {...register('website')}
+                        type='text'
+                        placeholder='Website'
+                        className='mt-1 block w-full rounded-md border border-gray-500 px-3 py-2 shadow-sm focus:border-yellow-500 focus: outline-none focus: ring-yellow-500'
+                    />
+                    {errors.website && (
+                        <p className='text-sm mt-1 text-red-600'>
+                            {errors.website.message}
+                        </p>
+                    )}
+                    
                     <button
                        
                         className="w-full py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"

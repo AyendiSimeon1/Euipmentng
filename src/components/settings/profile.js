@@ -1,6 +1,8 @@
 "use client";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { StickyNoteIcon } from 'lucide-react';
+import { PencilLine } from 'lucide-react';
 import InputField from "./InputField";
 
 export default function Profile () {
@@ -33,12 +35,12 @@ export default function Profile () {
     };
 
     return (
-        <div className="flex-1 p-8">
-            <div className='bg-white px-3 py-1 rounded-lg'>
+        <div className="flex-1 p-8 max-w-2xl">
+            <div className='bg-white px-3 mx-6 py-1 rounded-lg'>
                 <h1 className="text-xl font-semibold mb-8">Set up Profile</h1>
             </div>
-            <div className="max-w-2xl mt-3">
-                <div className="mb-8 flex justify-center">
+            <div className=" mt-3 bg-white mt-4 mx-6 px-6 py-2 rounded-lg">
+                <div className="mb-8 flex justify-center ">
                     <div className="relative">
                         <div className="w-32 h-32 rounded-full overflow-hidden">
                             <img
@@ -46,10 +48,14 @@ export default function Profile () {
                                 alt= "Profile"
                                 className="w-full h-full object-cover"
                             />
+                         
+                         <PencilLine  className="fas fa-bug absolute bottom-4 right-4 text-dark p-1 text-xl bg-yellow-200 rounded-full" />
+    
                         </div>
     
                     </div>
                 </div>
+                <div className='bg-white'>
                 <form className="space-y-4">
                     <input
                         {...register('surname')}
@@ -102,6 +108,8 @@ export default function Profile () {
                         Save
                     </button>
                 </form>
+                </div>
+                
             </div>
         </div>
     )
