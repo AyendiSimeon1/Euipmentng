@@ -47,8 +47,8 @@ export default function SignUpForm() {
                             
                             <input 
                                 {...register('surname')}
-                                type="text"
-                                className="mt-1 block w-full border rounded-md border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                                type="text"  
+                                className="mt-1 block w-full border rounded-md border-gray-300 px-3 py-1 shadow-sm focus:border-[#2A2F38]  focus:outline-none focus:ring-yellow-500"
                                 placeholder="Surname"
                                 />
                                 {errors.surname && (
@@ -73,7 +73,7 @@ export default function SignUpForm() {
               <input
                 {...register('email')}
                 type="email"
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm focus:border-[#2A2F38]  focus:outline-none focus:ring-yellow-500"
                 placeholder="Email"
               />
               {errors.email && (
@@ -89,7 +89,7 @@ export default function SignUpForm() {
                 <input
                   {...register('password')}
                   type={showPassword ? 'text' : 'password'}
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm focus:border-[#2A2F38]  focus:outline-none focus:ring-yellow-500"
                   placeholder="Password"
                 />
                 <button
@@ -117,7 +117,7 @@ export default function SignUpForm() {
                 <input
                   {...register('confirmPassword')}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm focus:border-[#2A2F38]  focus:outline-none focus:ring-yellow-500"
                   placeholder="Confirm Password"
                />
                 <button
@@ -143,15 +143,15 @@ export default function SignUpForm() {
                 <input
                     {...register('terms')}
                     type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 text-yellow-600 focus:ring-yellow-500"
+                    className="h-4 w-4 rounded border-gray-300  px-3 py-1 text-yellow-600 focus:ring-yellow-500"
                 />
                 <label
                     htmlFor="terms"
                     className="ml-2 block text-sm text-gray-900"
                 >
-                    Yes, I understand and agree to Equipment.ng Terms of Service, including the
+                    Yes, I understand and agree to Equipment.ng <span className='font-bold'>Terms of Service</span> , including the
                     
-                    User Agreement and Privacy Policy
+                    <span className='font-bold'>User Agreement and Privacy Policy</span>
                
                 </label>
                 </div>
@@ -162,7 +162,7 @@ export default function SignUpForm() {
                 <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
+                className="w-full flex justify-center py-3 px-5 border border-transparent rounded-md shadow-sm text-sm rounded-full font-medium text-white bg-[#2A2F38]  hover:bg-[#2A2F38] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
                 >
                 {isLoading ? 'Signing up...' : 'Sign Up to Equipment.ng'}
                 </button>

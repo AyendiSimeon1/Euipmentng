@@ -48,7 +48,7 @@ export default function LoginForm() {
                   {...register('email')}
                   type="email"
                   placeholder="Email"
-                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-[#2A2F38] focus:outline-none focus:ring-[#2A2F38]"
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">
@@ -63,7 +63,7 @@ export default function LoginForm() {
                     {...register('password')}
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Password"
-                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                    className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-[#2A2F38] focus:outline-none focus:ring-[#2A2F38]"
                   />
                   <button
                     type="button"
@@ -86,15 +86,15 @@ export default function LoginForm() {
 
               <div className="flex justify-between">
                 <div className="flex items-center px-2">
-                  <input
-                    {...register('terms')}
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-yellow-300 text-yellow-600 focus:ring-yellow-500 checked:bg-yellow-600"
-                  />
+                <input
+                  {...register('terms')}
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-gray-300 bg-white checked:border-red-500 checked:bg-red-50"
+                />
                   <p className="px-2 font-medium text-slate">Remember me</p>
                 </div>
                 <div>
-                  <a href="/" className="text-yellow-500 font-medium">
+                  <a href="/" className="text-[#2A2F38] font-bold">
                     Forgot Password?
                   </a>
                 </div>
@@ -106,7 +106,7 @@ export default function LoginForm() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-[#2A2F38] hover:bg-[#2A2F38] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
               >
                 {isLoading ? 'Signing in...' : 'Login'}
               </button>
@@ -133,7 +133,7 @@ export default function LoginForm() {
             </form>
           </div>
           <div>
-            <p className='text-center mt-4 text-gray-600'>Don't have an account? <a href='/' className='text-yellow-500 font-medium'>Create an account</a></p>
+            <p className='text-center mt-4 text-[#2A2F38]'>Don't have an account? <a href='/' className='text-[#2A2F38] font-bold'>Create an account</a></p>
           </div>
         </div>
       </div>
