@@ -151,7 +151,7 @@ export default function SignUpForm() {
                 >
                     Yes, I understand and agree to Equipment.ng <span className='font-bold'>Terms of Service</span> , including the
                     
-                    <span className='font-bold'>User Agreement and Privacy Policy</span>
+                    <span className='font-bold'> User Agreement and Privacy Policy</span>
                
                 </label>
                 </div>
