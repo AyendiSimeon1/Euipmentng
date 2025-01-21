@@ -39,7 +39,7 @@ export default function SignupConfirmation() {
                             <input
                                 {...register('code')}
                                 type='text'
-                                placeholder='code'
+                                placeholder='Code'
                                 className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-2'
                             />
                             {errors.code && (
@@ -51,7 +51,7 @@ export default function SignupConfirmation() {
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 disabled:opacity-50"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-[#2A2F38] hover:bg-[#2A2F38] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2A2F38] disabled:opacity-50"
                         >
                             {isLoading ? 'Loading...' : 'Contine'}
                         </button>

@@ -1,10 +1,13 @@
+"use client";
+import { useForm } from "react-hook-form";
 import FormInput from "./Form";
 import Form from './Form';
 import FormSelect from './FormSelect';
+import { useState } from "react";
 import FormCheckbox from './FormCheckbox';
 
 export default function EquipmentForm  ()  {
-    const [step, setStep] = React.useState(1);
+    const [step, setStep] = useState(1);
     const { register, handleSubmit, formState: { errors } } = useForm();
   
     const onSubmit = (data) => {
@@ -13,6 +16,7 @@ export default function EquipmentForm  ()  {
     };
   
     const renderStep1 = () => (
+      
       <div className="space-y-4">
         <h2 className="text-xl font-semibold mb-6">Basic Details</h2>
         <FormInput

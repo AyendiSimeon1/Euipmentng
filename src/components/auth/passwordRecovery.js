@@ -29,7 +29,7 @@ export default function ForgotPassword () {
         <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
-                   Change to a new password
+                   Forgot Password?
                 </h2>
                 <p className="text-center text-gray-600 mt-4">Please input confirmation code to change password</p>
             </div>
@@ -41,7 +41,7 @@ export default function ForgotPassword () {
                             <input
                                 type='text'
                                 placeholder='Code'
-                                className='mt-1 block w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500'
+                                className='mt-1 block w-full rounded-md border border-gray-100 px-3 py-1 shadow-sm  focus:outline-none focus:ring-gray-300'
                                 {...register('code')}
                             />
                             {errors.code && (
@@ -55,9 +55,9 @@ export default function ForgotPassword () {
                         <div className="relative">
                             <input
                             {...register('password')}
-                            placeholder='Password'
+                            placeholder='New Password'
                             type={showPassword ? 'text' : 'password'}
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                            className="mt-1 block w-full rounded-md border border-gray-100 px-3 py-2 shadow-sm focus:outline-none focus:ring-gray-300"
                             />
                             <button
                             type="button"
@@ -85,7 +85,7 @@ export default function ForgotPassword () {
                             {...register('confirmPassword')}
                             placeholder='Confirm Password'
                             type={showConfirmPassword ? 'text' : 'password'}
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-yellow-500"
+                            className="mt-1 block w-full rounded-md border border-gray-100 px-3 py-2 shadow-sm focus:border-gray-100 focus:outline-none focus:ring-gray-300"
                             />
                             <button
                             type="button"
@@ -109,7 +109,7 @@ export default function ForgotPassword () {
                         <div className='mt-6 flex justify-center'>
                             <button 
                                 type='button'
-                                className='w-full max-w-xs inline-flex justify-center rounded-full border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 bg-yellow-400 hover:bg-gray-50 focus:outline-none'>
+                                className='w-full max-w-xs inline-flex text-white justify-center rounded-full border border-gray-300 shadow-sm px-7 py-3 text-base font-medium text-gray-700 bg-[#2A2F38] hover:bg-[#2A2F38] focus:outline-none'>
                                     Continue
                                 </button>
                         </div>

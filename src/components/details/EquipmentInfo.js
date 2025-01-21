@@ -7,19 +7,19 @@ export default function EquipmentInfo ({ title, location, brand, color, year }) 
             <p className="text-sm text-gray-600">{location} </p>
             <div className="flex">
                 <div>
-                    <p className=""><strong>Make: </strong></p>
+                    <p className=""><strong>Make </strong></p>
                     <p>{location}</p> 
                 </div>
                 <div className="pl-8">
-                    <p ><strong>Brand: </strong></p>
+                    <p ><strong>Brand </strong></p>
                     <p>{brand} </p>
                 </div>
                 <div className="pl-8">
-                    <p ><strong>Color: </strong></p>
+                    <p ><strong>Color</strong></p>
                     <p>{color} </p>
                 </div>
                 <div className="pl-8"> 
-                    <p ><strong>Year of Manufacture: </strong> </p>
+                    <p ><strong>Year of Manufacture </strong> </p>
                     <p>{year}</p>
                 </div>
                 

@@ -52,7 +52,7 @@ export default function SavedEquipment ({}) {
       ];
 
     return (
-        <div>
+        <div className="bg-gray-100">
             <Layout>
                 <SavedEquipmentComponent savedItems={savedItems} />
             </Layout>

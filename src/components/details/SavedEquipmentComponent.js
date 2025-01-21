@@ -4,11 +4,14 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { BookmarkCheckIcon } from 'lucide-react';
 export default function SavedEquipmentComponent({ savedItems }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       {savedItems.map((item, index) => (
         <div key={index} className="relative bg-white p-4 rounded-lg shadow-lg">
-      
-        <BookmarkCheckIcon className="absolute top-2 right-2 text-yellow-500 text-xl" />
+        
+        <div className='bg-gray-200 rounded-full p-5 absolute top-2 right-2 m-4'>
+        <BookmarkCheckIcon className="absolute top-2 right-2 text-gray-500 text-xl" />
+        </div>
+        
         
           <div className="flex items-center">
             <Image 

@@ -16,7 +16,8 @@ var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_
 __turbopack_esm__({
     "BASEURL": (()=>BASEURL)
 });
-const BASEURL = process.env.BASE_URL;
+const BASEURL = ("TURBOPACK compile-time value", "equipmentapi.onrender.com");
+console.log('The base url:', BASEURL);
 }}),
 "[externals]/util [external] (util, cjs)": (function(__turbopack_context__) {
 
@@ -131,7 +132,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib
 ;
 const signUpUser = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$reduxjs$2f$toolkit$2f$dist$2f$redux$2d$toolkit$2e$modern$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$locals$3e$__["createAsyncThunk"])('auth/signUpUser', async (userData, { rejectWithValue })=>{
     try {
-        const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$config$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BASEURL"]}/api/signup`, userData);
+        const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].post(`https://${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$utils$2f$config$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["BASEURL"]}/auth/signup`, userData);
         return response.data;
     } catch (error) {
         return rejectWithValue(error.response.data);
@@ -195,7 +196,7 @@ const initialState = {};
 const middleware = [
     __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$redux$2d$thunk$2f$dist$2f$redux$2d$thunk$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["thunk"]
 ];
-const store = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$redux$2f$dist$2f$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createStore"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$reducers$2f$reducers$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], initialState);
+const store = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$redux$2f$dist$2f$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createStore"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$redux$2f$reducers$2f$reducers$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], initialState, (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$redux$2f$dist$2f$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["compose"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$redux$2f$dist$2f$redux$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["applyMiddleware"])(...middleware)));
 const __TURBOPACK__default__export__ = store;
 }}),
 "[project]/src/Provider.js [app-ssr] (ecmascript)": ((__turbopack_context__) => {

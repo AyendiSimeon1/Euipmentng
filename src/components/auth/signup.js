@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { Eye, EyeOff } from 'lucide-react';
 import { signUpSchema } from "@/schema/signupSchema";
