@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///home/ayendi/projects/freelance/Equipment-ng-frontend/src/redux/store.js"],"sourcesContent":["import { createStore, applyMiddleware } from 'redux';\nimport thunk from 'redux-thunk';\nimport rootReducer from './reducers'; \n\nconst initialState = {};\n\nconst middleware = [thunk];\n\nconst store = createStore(\n    rootReducer,\n    initialState,\n    \n);\n\nexport default store;"],"names":[],"mappings":";;;;;;;;AACA;AADA;;;;AAIA,MAAM,eAAe,CAAC;AAEtB,MAAM,aAAa;IAAC,yJAAA,CAAA,UAAK;CAAC;AAE1B,MAAM,QAAQ,CAAA,GAAA,uIAAA,CAAA,cAAW,AAAD,EACpB,aACA;uCAIW"}},
+    {"offset": {"line": 34, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 40, "column": 0}, "map": {"version":3,"sources":["file:///home/ayendi/projects/freelance/Equipment-ng-frontend/src/Provider.js"],"sourcesContent":["\"use client\";\n\nimport { Provider } from \"@reduxjs/toolkit\";\nimport { store } from '@/redux/store';\n\nexport default function RootProvider({ children }) {\n    return (\n        <Provider store={store}>\n            {children}\n        </Provider>\n    )\n}"],"names":[],"mappings":";;;;AAGA;AADA;AAFA;;;;AAKe,SAAS,aAAa,EAAE,QAAQ,EAAE;IAC7C,qBACI,8OAAC,4LAAA,CAAA,WAAQ;QAAC,OAAO,qHAAA,CAAA,QAAK;kBACjB;;;;;;AAGb"}},
+    {"offset": {"line": 60, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

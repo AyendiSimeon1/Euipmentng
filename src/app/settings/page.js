@@ -7,6 +7,12 @@ import Layout from '@/components/settings/layout';
 import CompanyDetails from '@/components/settings/CompanyDetails';
 import ChangePassword from '@/components/settings/ChangePassword';
 
+export const metadata = {
+    title: 'Equiments.ng | Settings',
+    description: 'Settings',
+}
+  
+
 export default function SettingsPage () {
     const [currentRoute, setCurrentRoute] = useState('profile');
 

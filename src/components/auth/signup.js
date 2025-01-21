@@ -6,11 +6,15 @@ import { signUpSchema } from "@/schema/signupSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpUser } from "@/redux/reducers/authReducers";
 
 export default function SignUpForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useDispatch();
+    const { loading, error } = useSelector((state) => state.auth);
 
     const {
         register,
@@ -20,15 +24,8 @@ export default function SignUpForm() {
         resolver: zodResolver(signUpSchema),
     });
 
-    const onSubmit = async(data) => {
-        try {
-            setIsLoading(true);
-            console.log(data);
-        } catch (error) {
-            console.error('Error:', error);
-        } finally {
-            setIsLoading(false);
-        }
+    const onSubmit = (data) => {
+        dispatch(signUpUser(data));
     };
 
     return (

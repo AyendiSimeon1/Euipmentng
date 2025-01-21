@@ -1,6 +1,11 @@
 import Layout from "@/components/details/Layout";
 import SavedEquipmentComponent from "@/components/details/SavedEquipmentComponent";
 
+export const metadata = {
+  title: 'Equiments.ng | Saved Equipments',
+  description: 'Saved Equipments',
+}
+
 export default function SavedEquipment ({}) {
     const image = '/future.jpeg';
     const savedItems = [
