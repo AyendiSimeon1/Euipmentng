@@ -1,6 +1,6 @@
 import LoginForm from "@/components/auth/login";
 
-export const metadata = {
+const metadata = {
     title: 'Equiments.ng | Login',
     description: 'Login',
 }

@@ -1,6 +1,6 @@
 import EquipmentOffers from '@/components/listing/Offers';
 
-export const metadata = {
+const metadata = {
     title: 'Equiments.ng | Offers',
     description: 'Offers',
 }

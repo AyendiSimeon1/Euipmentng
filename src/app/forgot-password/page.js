@@ -1,6 +1,6 @@
 import CodeConfirmation from "@/components/auth/codeConfirmation";
 
-export const metadata = {
+const metadata = {
     title: 'Equiments.ng | Forgot Password',
     description: 'Forgot Password',
 }

@@ -7,7 +7,7 @@ import Layout from '@/components/settings/layout';
 import CompanyDetails from '@/components/settings/CompanyDetails';
 import ChangePassword from '@/components/settings/ChangePassword';
 
-export const metadata = {
+const metadata = {
     title: 'Equiments.ng | Settings',
     description: 'Settings',
 }

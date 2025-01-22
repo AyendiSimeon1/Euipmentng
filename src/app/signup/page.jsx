@@ -1,7 +1,7 @@
 import SignUpForm from "@/components/auth/signup";
 import Head from 'next/head';
 
-export const metadata = {
+const metadata = {
     title: 'Equiments.ng | Signup',
     description: 'Signup',
 }
