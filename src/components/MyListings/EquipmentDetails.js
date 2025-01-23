@@ -1,4 +1,4 @@
-const EquipmentDetails = ({ make, brand, color, yearOfManufacture }) => (
+export default function EquipmentDetails ({ make, brand, color, yearOfManufacture })  {
     <div className="grid grid-cols-4 gap-4 text-sm text-gray-600 mt-2">
       <div>
         <div className="font-medium">Make</div>
@@ -17,4 +17,4 @@ const EquipmentDetails = ({ make, brand, color, yearOfManufacture }) => (
         <div>{yearOfManufacture}</div>
       </div>
     </div>
-  );
+  };

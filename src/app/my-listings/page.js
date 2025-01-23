@@ -1,4 +1,5 @@
 import Header from "@/components/homepage/header";
+import EquipmentCard from '@/components/MyListings/EquipmentCard';
 
 const ListingsPage = () => {
     const listings = [
@@ -37,13 +38,13 @@ const ListingsPage = () => {
         
         <div className="max-w-5xl mx-auto py-8">
           <h1 className="text-2xl font-semibold mb-6 px-4">My Listings</h1>
-          {/* 
+          
           <div className="space-y-4">
             {listings.map((equipment) => (
               <EquipmentCard key={equipment.id} equipment={equipment} />
             ))}
           </div>
-          */}
+         
         </div>
       </div>
     );

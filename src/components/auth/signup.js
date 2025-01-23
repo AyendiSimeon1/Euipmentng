@@ -33,13 +33,30 @@ const Signup = () => {
     
     try {
       const resultAction = await dispatch(signUpUser(signupData));
+      
+      // Handle rejected action
+      if (signUpUser.rejected.match(resultAction)) {
+        const errorMessage = resultAction.payload?.message || 'Signup failed';
+        toast.error(errorMessage);
+        return;
+      }
+
+      // Handle successful signup
       if (signUpUser.fulfilled.match(resultAction)) {
         toast.success(resultAction.payload.message);
-
-        navigate.push('/signup-confirmation', { state: { email: data.email }});
+        navigate.push('/verify-otp', { state: { email: data.email }});
       }
     } catch (err) {
-      toast.error(error || 'Signup failed');
+      // Log error for debugging
+      console.error('Signup error:', err);
+      
+      // Extract error message from various possible formats
+      const errorMessage = 
+        err.response?.data?.message || 
+        err.message || 
+        'An error occurred during signup';
+      
+      toast.error(errorMessage);
     }
   };
 

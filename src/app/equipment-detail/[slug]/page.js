@@ -80,7 +80,7 @@ export default function Detail() {
                     />
                     <Description description={description} />
                 </div>
-                <PriceInfo price={price} negotiable={true} />
+                {/* <PriceInfo price={price} negotiable={true} /> */}
             </div>
             <RelatedItem items={relatedItems} />
         </Layout>
