@@ -28,7 +28,7 @@ export const verifyOTP = createAsyncThunk(
       console.log('API Response:', response.data);
       return response.data;
     } catch (error) {
-      console.error('API Error:', error.response?.data);
+      // console.error('API Error:', error.response?.data);
       return rejectWithValue(error.response?.data || {
         message: 'Verification failed'
       });
