@@ -2,8 +2,10 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { verifyOTP } from '@/redux/reducers/authReducers';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from "next/navigation";
+import Link from 'next/link';
 
 export default function SignupConfirmation() {
     const dispatch = useDispatch();
@@ -49,6 +51,12 @@ export default function SignupConfirmation() {
     return (
         <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                className="!font-sans"
+            />
                 <h1 className="text-center text-3xl font-bold tracking-tight text-gray-900">
                     Check your email for code
                 </h1>

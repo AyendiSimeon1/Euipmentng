@@ -1,6 +1,6 @@
 import Header from "@/components/homepage/header";
 import EquipmentCard from '@/components/MyListings/EquipmentCard';
-
+import Footer from '@/components/homepage/footer';
 const ListingsPage = () => {
     const listings = [
       {
@@ -33,6 +33,7 @@ const ListingsPage = () => {
     ];
   
     return (
+      <div>
       <div className="min-h-screen bg-gray-50">
         <Header />
         
@@ -46,6 +47,8 @@ const ListingsPage = () => {
           </div>
          
         </div>
+      </div>
+      <Footer />
       </div>
     );
   };

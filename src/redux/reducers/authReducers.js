@@ -80,7 +80,8 @@ const authSlice = createSlice({
     error: null,
     isVerified: false,
     token: null,
-    message: null
+    message: null,
+    isAuthenticated: false
   },
   reducers: {
     clearAuthState: (state) => {
@@ -91,6 +92,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.isVerified = false;
+      state.isAuthenticated = false;
     }
   },
   extraReducers: (builder) => {
@@ -133,6 +135,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isVerified = action.payload.user.isVerified;
         state.message = action.payload.message;
+        state.isAuthenticated = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

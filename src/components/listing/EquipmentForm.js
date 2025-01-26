@@ -3,30 +3,221 @@ import { useForm } from "react-hook-form";
 import FormInput from "./Form";
 import Form from './Form';
 import FormSelect from './FormSelect';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"
+import { addEquipment } from "@/redux/reducers/equipmentReducer";
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import FormCheckbox from './FormCheckbox';
+import { Loader2 } from 'lucide-react';
 
 export default function EquipmentForm  ()  {
     const [step, setStep] = useState(1);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    // const [loading, setLoading] = useState(false);
     const [accessories, setAccessories] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const [images, setImages] = useState([]);
+    const [video, setVideo] = useState(null);
+    const [previewImages, setPreviewImages] = useState([]);
+
+    const { loading } = useSelector((state) => state.equipment || {});
   
-    const onSubmit = (data) => {
-      console.log(data);
-   
+
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      watch // Add watch to get form values
+    } = useForm();
+
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        // Redirect to login page if no token
+        router.push('/login');
+        toast.error('Please log in to add equipment');
+      }
+    }, [router]);
+  
+    const handleImageUpload = (e) => {
+      const files = Array.from(e.target.files);
+    
+    
+    const validFiles = files.filter(file => {
+      const isValid = file.type.startsWith('image/');
+      const isValidSize = file.size <= 5 * 1024 * 1024; // 5MB limit
+      
+      if (!isValid) toast.error('Please upload only image files');
+      if (!isValidSize) toast.error('Image size should be less than 5MB');
+      
+      return isValid && isValidSize;
+    });
+
+    if (validFiles.length === 0) return;
+
+    setImages(validFiles);
+      
+      const previews = files.map(file => URL.createObjectURL(file));
+      setPreviewImages(previews);
     };
   
+    const handleVideoUpload = (e) => {
+      const file = e.target.files[0];
+    
+    if (file) {
+      const isValid = file.type.startsWith('video/');
+      const isValidSize = file.size <= 50 * 1024 * 1024; // 50MB limit
+      
+      if (!isValid) {
+        toast.error('Please upload a valid video file');
+        return;
+      }
+      if (!isValidSize) {
+        toast.error('Video size should be less than 50MB');
+        return;
+      }
+      
+      setVideo(file);
+    }
+  };
+  
+  
+  // const onSubmit = async (data) => {
+  //   try {
+  //     // Log all form values
+  //     console.log('Form Data:', data);
+  //     console.log('Images:', images);
+  //     console.log('Video:', video);
+  //     console.log('Accessories:', accessories);
+
+  //     // Create FormData for file uploads
+  //     const formData = new FormData();
+      
+  //     // Append all form payload
+  //     Object.keys(data).forEach(key => {
+  //       // Special handling for accessories
+  //       if (key === 'accessories') {
+  //         formData.append(key, JSON.stringify(accessories));
+  //       } else {
+  //         formData.append(key, data[key]);
+  //       }
+  //     });
+
+  //     // Append files if they exist
+  //     if (images.length > 0) {
+  //       images.forEach((image, index) => {
+  //         formData.append('images', image);
+  //       });
+  //     }
+
+  //     if (video) {
+  //       formData.append('video', video);
+  //     }
+
+  //     console.log('The complete FormData:', Object.fromEntries(formData));
+      
+  //     const resultAction = await dispatch(addEquipment(formData));
+
+  //     if (resultAction.type === addEquipment.fulfilled.type) {
+  //       toast.success(resultAction.payload.message);
+  //       router.push('/dashboard');
+  //     } else {
+  //       const errorMessage = resultAction.payload?.message || 'Failed to add equipment';
+  //       toast.error(errorMessage);
+  //     }
+  //   } catch (error) {
+  //     console.error('Equipment creation error:', error);
+  //     toast.error(error.response?.data?.message || 'An error occurred');
+  //   }
+  // };
+
+  const onSubmit = async (data) => {
+    try {
+      // Create single FormData instance
+      const formData = new FormData();
+  
+      // Add all required fields with defaults and type conversion
+      const fields = {
+        location: data.location?.trim() || 'Default Location',
+        category: data.category?.trim() || 'construction',
+        subcategory: data.subcategory?.trim() || 'general',
+        name: data.name?.trim() || 'Unnamed Equipment',
+        description: data.description?.trim() || 'No description provided',
+        brand: data.brand?.trim() || 'Unknown Brand',
+        model: data.model?.trim() || 'Generic Model',
+        workingcondition: String(data.condition === 'brandNew'),
+        pricingschedule: data.priceSchedule?.trim() || 'hourly',
+        amount: String(data.amount || '0'),
+        negotiable: String(Boolean(data.negotiable))
+      };
+  
+      // Append all payload to FormData
+      Object.entries(fields).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+  
+      // Handle file uploads
+      if (images?.length) {
+        images.forEach(image => {
+          if (image instanceof File) {
+            formData.append('images', image);
+          }
+        });
+      }
+      
+      if (video instanceof File) {
+        formData.append('video', video);
+      }
+  
+      // Log FormData contents for debugging
+      const formDataObj = {};
+      formData.forEach((value, key) => {
+        formDataObj[key] = value;
+      });
+      console.log('Submitting form data:', formDataObj);
+  
+      const resultAction = await dispatch(addEquipment(formDataObj));
+  
+      if (resultAction.type === addEquipment.fulfilled.type) {
+        toast.success(resultAction.payload.message);
+        router.push('/');
+      } else {
+        const errorMessage = resultAction.payload?.error || 
+                            resultAction.payload?.message || 
+                            'Failed to add equipment';
+        toast.error(errorMessage);
+      }
+    } catch (error) {
+      console.error('Equipment creation error:', {
+        message: error.message,
+        response: error.response?.data,
+        status: error.response?.status
+      });
+      
+      const errorMessage = error.response?.data?.message || 
+                          error.response?.data?.error ||
+                          'An error occurred while adding equipment';
+      toast.error(errorMessage);
+    }
+  };
     const renderStep1 = () => (
       
-      <div className="space-y-4">
+      <div className="max-w-2xl mx-auto p-6">
+      <ToastContainer />
+      {/* <form onSubmit={handleSubmit(onSubmit)} className="space-y-6"> */}
         <h2 className="text-xl font-semibold mb-6">Basic Details</h2>
+        
         <FormInput
           label="Location"
           name="location"
           register={register}
           error={errors.location}
         />
+
         <FormSelect
           label="Category"
           name="category"
@@ -34,40 +225,73 @@ export default function EquipmentForm  ()  {
           options={[
             { value: 'electronics', label: 'Electronics' },
             { value: 'machinery', label: 'Machinery' },
-          ]}
-          error={errors.category}
-        />
-        <FormSelect
-          label="Sub Category"
-          name="sub-category"
-          register={register}
-          options={[
-            { value: 'electronics', label: 'Electronics' },
-            { value: 'machinery', label: 'Machinery' },
+            { value: 'construction', label: 'Construction' },
+            { value: 'agriculture', label: 'Agriculture' }
           ]}
           error={errors.category}
         />
 
-        <FormInput
-          label="Name of Equipment"
-          name="equipmentName"
+        <FormSelect
+          label="Sub Category"
+          name="subcategory"
           register={register}
-          error={errors.equipmentName}
+          options={[
+            { value: 'heavy', label: 'Heavy Equipment' },
+            { value: 'light', label: 'Light Equipment' },
+            { value: 'tools', label: 'Tools' },
+            { value: 'accessories', label: 'Accessories' }
+          ]}
+          error={errors.subcategory}
         />
-        <div className="mt-4">
-          <h3 className="text-sm font-medium text-gray-700 mb-2">Add Image</h3>
-          <h3 className="text-sm font-medium text-gray-700 mb-2">Add atleast 3 images</h3>
-          <p className="text-sm font-medium text-gray-700 mb-2">First image is your cover image</p>
-          <div className="flex gap-2">
-            <button className="p-4 bg-yellow-100 rounded-md">
-              <span className="text-2xl">+</span>
-            </button>
-            <button className="p-4 bg-yellow-100 rounded-md">
-              <span className="text-sm">Add Video</span>
-            </button>
+
+        <FormInput
+          label="Equipment Name"
+          name="name"
+          register={register}
+          error={errors.name}
+        />
+
+        <FormInput
+          label="Description"
+          name="description"
+          register={register}
+          error={errors.description}
+        />
+
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">Images</label>
+          <input
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="inline-flex items-center px-2 py-1 rounded-full text-sm bg-gray-100"
+          />
+          <div className="mt-2 grid grid-cols-3 gap-2">
+            {previewImages.map((preview, index) => (
+              <img
+                key={index}
+                src={preview}
+                alt={`Preview ${index + 1}`}
+                className="h-24 w-24 object-cover rounded"
+              />
+            ))}
           </div>
         </div>
-      </div>
+
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-gray-700">Video</label>
+          <input
+            type="file"
+            accept="video/*"
+            onChange={handleVideoUpload}
+            className="inline-flex items-center px-2 py-1 rounded-full text-sm bg-gray-100"
+          />
+        </div>
+
+       
+      {/* </form> */}
+    </div>
     );
   
     const renderStep2 = () => {
@@ -184,47 +408,71 @@ export default function EquipmentForm  ()  {
       );
     };
 
-    const renderStep3 = () => (
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold mb-6">Pricing</h2>
-        <FormSelect
-          label="Price Schedule"
-          name="priceSchedule"
-          register={register}
-          options={[
-            { value: 'hourly', label: 'Hourly' },
-            { value: 'daily', label: 'Daily' },
-            { value: 'weekly', label: 'Weekly' },
-          ]}
-          error={errors.priceSchedule}
-        />
-        <FormInput
-          label="Price"
-          name="price"
-          type="number"
-          register={register}
-          error={errors.price}
-        />
-        <FormCheckbox
-          label="Negotiable"
-          name="isNegotiable"
-          register={register}
-        />
-        <div className="space-y-2">
-          <h3 className="text-sm font-medium text-gray-700">Payment Method</h3>
+    const renderStep3 = () => {
+      return (
+        <div className="space-y-4">
+          <h2 className="text-xl text-center font-semibold mb-6">Pricing</h2>
+          
+          <FormSelect
+            label="Price Schedule"
+            name="priceSchedule"
+            register={register}
+            options={[
+              { value: 'hourly', label: 'Hourly' },
+              { value: 'daily', label: 'Daily' },
+              { value: 'weekly', label: 'Weekly' },
+            ]}
+            error={errors.priceSchedule}
+          />
+    
+          <div className="flex gap-4">
+            <FormInput
+              label="Price"
+              name="price"
+              type="number"
+              min="0"
+              register={register}
+              error={errors.price}
+            />
+            <FormSelect
+              label="Currency"
+              name="currency"
+              register={register}
+              options={[
+                { value: 'USD', label: 'USD' },
+                { value: 'EUR', label: 'EUR' },
+              ]}
+            />
+          </div>
+    
           <FormCheckbox
-            label="Pay On Delivery"
-            name="payOnDelivery"
+            label="Negotiable"
+            name="isNegotiable"
             register={register}
           />
-          <FormCheckbox
-            label="Payment After Usage"
-            name="paymentAfterUsage"
-            register={register}
-          />
+    
+          <div className="space-y-2">
+            <h3 className="text-sm font-medium text-gray-700">Payment Method</h3>
+            <div role="radiogroup" className="space-y-2">
+              <FormCheckbox
+                label="Pay On Delivery"
+                name="paymentMethod"
+                value="onDelivery"
+                register={register}
+                type="radio"
+              />
+              <FormCheckbox
+                label="Payment After Usage"
+                name="paymentMethod"
+                value="afterUsage"
+                register={register}
+                type="radio"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
   
     return (
       <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
@@ -254,11 +502,20 @@ export default function EquipmentForm  ()  {
               </button>
             ) : (
               <button
-                type="submit"
-                className="px-4 py-2 text-sm font-medium text-white bg-gray-500 rounded-md hover:bg-gray-800"
-              >
-                Complete
-              </button>
+                  type="submit"
+                  
+                  className={`px-4 py-2 text-sm font-medium text-white rounded-md flex items-center justify-center
+                    ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-500 hover:bg-gray-800'}`}
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    'Complete'
+                  )}
+                </button>
             )}
           </div>
         </form>

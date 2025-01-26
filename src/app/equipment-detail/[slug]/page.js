@@ -1,88 +1,76 @@
-// app/equipment-detail/[slug]/page.js
 "use client";
 
 import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEquipmentById } from '@/redux/reducers/equipmentReducer';
 import Layout from '@/components/details/Layout';
 import ImageGallery from '@/components/details/ImageGallery';
 import EquipmentInfo from '@/components/details/EquipmentInfo';
 import Description from '@/components/details/Description';
 import PriceInfo from '@/components/details/PriceInfo';
 import RelatedItem from '@/components/details/RelatedItems';
-import { cardData } from '@/components/ui/cards/HomepageCard';
-import { useEffect, useState } from 'react';
-import Image from 'next/image'; // Add this if you're using Next.js Image component
 
 export default function Detail() {
     const params = useParams();
-    const [equipment, setEquipment] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
+    const { selectedEquipment, loading, error } = useSelector(state => state.equipments);
 
     useEffect(() => {
-        if (params.slug) {
-            try {
-                const foundEquipment = cardData.find(item => item.slug === params.slug);
-                setEquipment(foundEquipment);
-            } catch (error) {
-                console.error('Error finding equipment:', error);
-            } finally {
-                setIsLoading(false);
-            }
+        if (params.id) {
+            dispatch(fetchEquipmentById(params.id));
         }
-    }, [params.slug]);
+    }, [dispatch, params.id]);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
+    if (loading) {
+        return <div className="flex justify-center items-center min-h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+        </div>;
     }
 
-    if (!equipment) {
-        return <div>Equipment not found</div>;
+    if (error) {
+        return <div className="flex justify-center items-center min-h-screen text-red-500">
+            {error}
+        </div>;
     }
 
-    // Ensure image URLs are valid
-    const mainImage = equipment.image?.startsWith('/') 
-        ? equipment.image 
-        : `/${equipment.image}`; // Add leading slash if missing
-
-    const { price, title, description, availability, slug } = equipment;
-
-    // Ensure related item images are valid URLs
-    const relatedItems = [
-        {
-            image: '/future.jpeg', // Ensure this path exists in your public folder
-            title: 'Item 1',
-            price: '20000'
-        },
-        {
-            image: '/future.jpeg', // Ensure this path exists in your public folder
-            title: 'Item 2',
-            price: '4000'
-        }
-    ];
+    if (!selectedEquipment) {
+        return <div className="flex justify-center items-center min-h-screen">
+            Equipment not found
+        </div>;
+    }
 
     return (
         <Layout>
-            <ImageGallery 
-                mainImage={mainImage} 
-                thumbnails={[mainImage, mainImage]} // Use the validated mainImage
-                width={500} 
-                height={500} 
-                price={price} 
-                negotiable={true} 
-            />
-            <div className="grid grid-cols-3 gap-8 mt-8 rounded-lg shadow p-4">
-                <div className="col-span-2">
-                    <EquipmentInfo 
-                        title={title} 
-                        location="Port Harcourt, Rumuola" 
-                        brand="Some Brand" 
-                        color="Yellow" 
-                        year="2022" 
-                    />
-                    <Description description={description} />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="w-full">
+                        <ImageGallery images={selectedEquipment.images} />
+                    </div>
+                    
+                    <div className="space-y-6">
+                        <EquipmentInfo 
+                            name={selectedEquipment.name}
+                            category={selectedEquipment.category}
+                            condition={selectedEquipment.condition}
+                        />
+                        
+                        <PriceInfo 
+                            price={selectedEquipment.price}
+                            rentPeriod={selectedEquipment.rentPeriod}
+                        />
+                        
+                        <Description description={selectedEquipment.description} />
+                    </div>
                 </div>
-                {/* <PriceInfo price={price} negotiable={true} /> */}
+
+                <div className="mt-12">
+                    <RelatedItem 
+                        category={selectedEquipment.category}
+                        currentId={selectedEquipment._id}
+                    />
+                </div>
             </div>
-            <RelatedItem items={relatedItems} />
         </Layout>
     );
 }

@@ -1,5 +1,6 @@
 import Layout from "@/components/details/Layout";
 import SavedEquipmentComponent from "@/components/details/SavedEquipmentComponent";
+import Footer from '@/components/homepage/footer';
 
 const metadata = {
   title: 'Equiments.ng | Saved Equipments',
@@ -52,10 +53,13 @@ export default function SavedEquipment ({}) {
       ];
 
     return (
+      <div>
         <div className="bg-gray-100">
             <Layout>
                 <SavedEquipmentComponent savedItems={savedItems} />
             </Layout>
+        </div>
+      
         </div>
     )
 

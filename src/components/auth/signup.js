@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signUpUser } from '@/redux/reducers/authReducers';
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Eye, EyeOff } from 'lucide-react';
 import { signUpSchema } from "@/schema/signupSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -41,16 +42,18 @@ const Signup = () => {
         return;
       }
 
-      // Handle successful signup
+     
       if (signUpUser.fulfilled.match(resultAction)) {
         toast.success(resultAction.payload.message);
-        navigate.push('/verify-otp', { state: { email: data.email }});
+        navigate.push('/signup-confirmation', { state: { email: data.email }});
+        toast.success('Signup Successful');
+      } else {
+        toast.error(resultAction.payload?.message || 'Signup failed');
       }
     } catch (err) {
-      // Log error for debugging
+     
       console.error('Signup error:', err);
       
-      // Extract error message from various possible formats
       const errorMessage = 
         err.response?.data?.message || 
         err.message || 
@@ -62,11 +65,18 @@ const Signup = () => {
 
   return (
     
+
     <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
           Welcome to Equipment.ng
         </h2>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          className="!font-sans"
+        />
         <p className="text-center text-xl mt-2">Sign up</p>
       </div>
 

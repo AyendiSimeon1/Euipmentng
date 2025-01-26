@@ -2,10 +2,11 @@
 import { useState } from 'react';
 import Sidebar from '@/components/settings/sidbar';
 import Profile from '@/components/settings/profile';
-import InputField from '@/components/settings/InputField'
+
 import Layout from '@/components/settings/layout';
 import CompanyDetails from '@/components/settings/CompanyDetails';
 import ChangePassword from '@/components/settings/ChangePassword';
+
 
 const metadata = {
     title: 'Equiments.ng | Settings',

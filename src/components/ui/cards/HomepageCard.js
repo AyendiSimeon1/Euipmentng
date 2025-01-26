@@ -1,44 +1,95 @@
-import React from 'react';
+"use client";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchEquipments } from '@/redux/reducers/equipmentReducer';
 import Link from 'next/link';
+import { BsBookmark } from 'react-icons/bs';  
+
+
+const slugify = (string) => {
+    return string
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '') // Remove special characters
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/--+/g, '-') 
+        .trim();
+};
 
 export const cardData = [
     {
         image: "future.jpeg",
-        price: "2,500,000.00",
+        amount: "2,500,000.00",
         duration: "per day",
-        title: "Steel Pipelines Cables",
+        name: "Steel Pipelines Cables",
         description: "Lorem ipsum dolor sit amet",
-        availability: "Available: Immediately",
+        workingcondition: "Available: Immediately",
         slug: "steel-pipelines-cables"
     },
     {
         image: "future.jpeg",
-        price: "1,800,000.00",
+        amount: "1,800,000.00",
         duration: "per week",
-        title: "High-Pressure Valves",
+        name: "High-Pressure Valves",
         description: "Consectetur adipiscing elit",
-        availability: "Available: In 3 days",
+        workingcondition: "Available: In 3 days",
         slug: "high-pressure-valves"
     },
 
 ];
 
 export default function Card() {
+    // const dispatch = useDispatch();
+    // const { equipments, loading, error } = useSelector((state) => state.equipments);
+
+    // useEffect(() => {
+    //     dispatch(fetchEquipments());
+    // }, [dispatch]);
+
+    // if (loading) return <div>Loading...</div>;
+    // if (error) return <div>Error: {error}</div>;
+
+
     return (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8">
         {cardData.map((card, index) => (
-            <div key={index} className="max-w-sm rounded-lg overflow-hidden shadow-lg">
+            <div key={index} className="relative rounded-lg overflow-hidden shadow-lg bg-white">
                 <Link href={`equipment-detail/${card.slug}`}>
-                  
-                        <img className="w-full h-48 object-cover rounded-lg" src={card.image} alt={card.title} />
-                        <div className="p-4">
-                            <div className="text-3xl font-bold text-gray-800">{card.price}</div>
-                            <div className="text-sm text-gray-500">{card.duration}</div>
-                            <div className="text-xl font-semibold text-gray-700 mt-2">{card.title}</div>
-                            <div className="text-sm text-gray-600 mt-2">{card.description}</div>
-                            <div className="text-sm text-gray-600 font-semibold mt-4">{card.availability}</div>
+                    <div className="relative">
+                        <img 
+                            className="w-full h-48 object-cover rounded-t-lg" 
+                            src='/future.jpeg' 
+                            alt={card.name} 
+                        />
+                        <button 
+                            className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                // Add bookmark functionality here
+                            }}
+                        >
+                            <BsBookmark className="h-5 w-5 text-gray-700" />
+                        </button>
+                    </div>
+                    
+                    <div className="p-4">
+                        <div className="flex flex-col space-y-2">
+                            <div className="text-2xl sm:text-3xl font-bold text-gray-800">
+                                {card.amount}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                                {card.duration}
+                            </div>
+                            <div className="text-lg sm:text-xl font-semibold text-gray-700">
+                                {card.name}
+                            </div>
+                            <div className="text-sm text-gray-600">
+                                {card.description}
+                            </div>
+                            <div className="text-sm text-gray-600 font-semibold">
+                                {card.workingcondition}
+                            </div>
                         </div>
-        
+                    </div>
                 </Link>
             </div>
         ))}

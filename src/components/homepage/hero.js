@@ -1,5 +1,7 @@
 import Card from '@/components/ui/cards/HomepageCard';
 import { SearchIcon } from 'lucide-react';
+import Link from 'next/link';
+import EquipmentRequests from '@/components/ui/cards/EquipmentRequest';
 
 export default function Hero() {
     return (
@@ -23,25 +25,25 @@ export default function Hero() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                        <select className="bg-white px-4 py-3 rounded-lg w-full sm:w-auto focus:outline-none border border-gray-300 text-gray-800 shadow-sm hover:border-gray-400">
+                        <select className="bg-white px-4 py-3 rounded-lg w-full sm:w-auto focus:outline-none  text-gray-800 shadow-sm hover:border-gray-400">
                             <option value="">Filter By:</option>
                             <option value="new-york">New York</option>
                             <option value="los-angeles">Los Angeles</option>
                             <option value="chicago">Chicago</option>
                         </select>
                         <div className="flex flex-col sm:flex-row items-center bg-white px-3 py-2 rounded-lg w-full sm:w-auto">
-                            <select className="p-3 rounded bg-white w-full sm:w-auto focus:outline-none border border-gray-300 text-gray-800 shadow-sm hover:border-gray-400">
+                            <select className="p-3 rounded bg-white w-full sm:w-auto focus:outline-none  text-gray-800 shadow-sm hover:border-gray-400">
                                 <option value="">Location</option>
                                 <option value="new-york">New York</option>
                                 <option value="los-angeles">Los Angeles</option>
                                 <option value="chicago">Chicago</option>
                             </select>
-                            <select className="mt-2 sm:mt-0 sm:ml-2 p-3 rounded bg-white w-full sm:w-auto focus:outline-none border border-gray-300 text-gray-800 shadow-sm hover:border-gray-400">
+                            <select className="mt-2 sm:mt-0 sm:ml-2 p-3 rounded bg-white w-full sm:w-auto focus:outline-none  text-gray-800 shadow-sm hover:border-gray-400">
                                 <option value="">Price</option>
                                 <option value="low-to-high">Low to High</option>
                                 <option value="industrial">Industrial</option>
                             </select>
-                            <select className="mt-2 sm:mt-0 sm:ml-2 p-3 rounded bg-white w-full sm:w-auto focus:outline-none border border-gray-300 text-gray-800 shadow-sm hover:border-gray-400">
+                            <select className="mt-2 sm:mt-0 sm:ml-2 p-3 rounded bg-white w-full sm:w-auto focus:outline-none  text-gray-800 shadow-sm hover:border-gray-400">
                                 <option value="">Category</option>
                                 <option value="construction">Construction</option>
                                 <option value="agriculture">Agriculture</option>
@@ -64,13 +66,16 @@ export default function Hero() {
                             Easy to follow steps to list a wide range of construction, agricultural and industrial equipments. <br />
                             Rent from verified lessors with ease.
                         </p>
+                        <Link href="/list-equipment">
                         <button className="mx-4 sm:mx-8 mt-4 text-white bg-[#2A2F38] font-medium px-6 py-3 text-lg rounded-full">
                             List an equipment
                         </button>
+                        </Link>
                     </div>
                 </div>
                 <Card />
+                <EquipmentRequests />
             </div>
         </div>
     );
-}
+};
