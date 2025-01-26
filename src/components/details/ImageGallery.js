@@ -5,7 +5,7 @@ export default function ImageGallery ({ mainImage, thumbnails, width, height, pr
         <div className="flex">
             <div className="w-3/4">
                 <Image src={mainImage} alt="Main Image" className="w-full rounded-lg shadow" width={width} height={height}/>
-
+                
             </div>
             <div className="w-1/4 pl-4 flex flex-col space-y-2">
                 {thumbnails.map((thumb, index)=> (

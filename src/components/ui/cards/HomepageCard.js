@@ -34,6 +34,60 @@ export const cardData = [
         workingcondition: "Available: In 3 days",
         slug: "high-pressure-valves"
     },
+    {
+        image: "future.jpeg",
+        amount: "2,500,000.00",
+        duration: "per day",
+        name: "Bulldozer",
+        description: "Powerful bulldozer for earthmoving and demolition.",
+        workingcondition: "Available: In 2 days",
+        slug: "bulldozer"
+    },
+    {
+        image: "future.jpeg",
+        amount: "4,000,000.00",
+        duration: "per day",
+        name: "Crane",
+        description: "High-capacity crane for lifting and moving heavy loads.",
+        workingcondition: "Available: Immediately",
+        slug: "crane"
+    },
+    {
+        image: "future.jpeg",
+        amount: "1,200,000.00",
+        duration: "per day",
+        name: "Forklift",
+        description: "Versatile forklift for material handling and warehouse operations.",
+        workingcondition: "Available: In 1 day",
+        slug: "forklift"
+    },
+    {
+        image: "future.jpeg",
+        amount: "2,800,000.00",
+        duration: "per day",
+        name: "Backhoe Loader",
+        description: "Multi-purpose backhoe loader for digging and loading.",
+        workingcondition: "Available: Immediately",
+        slug: "backhoe-loader"
+    },
+    {
+        image: "future.jpeg",
+        amount: "1,500,000.00",
+        duration: "per day",
+        name: "Compactor",
+        description: "Heavy-duty compactor for soil and asphalt compaction.",
+        workingcondition: "Available: In 3 days",
+        slug: "compactor"
+    },
+    {
+        image: "future.jpeg",
+        amount: "3,200,000.00",
+        duration: "per day",
+        name: "Motor Grader",
+        description: "Precision motor grader for road construction and maintenance.",
+        workingcondition: "Available: Immediately",
+        slug: "motor-grader"
+    },
 
 ];
 

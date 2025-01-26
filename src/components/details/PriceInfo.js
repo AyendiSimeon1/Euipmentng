@@ -4,7 +4,8 @@ export default function PriceInfo ({ price, negotiable }) {
   return (
     <div className="p-4 bg-white rounded-lg shadow-lg">
       <h3 className="text-xl font-bold">Cost</h3>
-      <p className="text-2xl font-semibold mt-2">{price.toLocaleString()} NGN</p>
+      {/* <p className="text-2xl font-semibold mt-2">{price.toLocaleString()} NGN</p> */}
+      <p className="text-2xl font-semibold mt-2">500 NGN</p>
       <p className="text-sm text-gray-600">{negotiable ? 'Negotiable' : 'Fixed Price'}</p>
       <button className="mt-4 w-full bg-gray-500 text-white py-2 rounded-full flex items-center justify-center space-x-2">
         <span>Contact Owner</span>

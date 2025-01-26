@@ -18,18 +18,10 @@ const Header = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
-          <div className="flex items-center">
-            <div className="relative h-8 w-24">
-              <Image
-                src="/logo.png"
-                alt="Equipment.ng Logo"
-                fill
-                style={{ objectFit: 'contain' }}
-                priority
-              />
-            </div>
-            <span className="text-white font-bold text-lg ml-2">Equipment.ng</span>
-          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-yellow-500 text-2xl">⚙️</span>
+            <span className="text-white font-semibold">Equipment.ng</span>
+        </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
@@ -39,68 +31,33 @@ const Header = () => {
             >
               My Listings
             </Link>
-            <Link 
-              href="/login"
-              className="text-white bg-[#2A2F38] font-medium px-6 py-3 text-lg rounded-full"
-            >
-              Login
+            <Link href="/" className="text-white hover:text-gray-300">Home</Link>
+            <Link href="/about" className="text-white hover:text-gray-300">About</Link>
+            <Link href="/contact" className="text-white hover:text-gray-300">Contact</Link>
+            <Link href="/profile" className="text-white hover:text-gray-300">
+              <FaUserCircle className="inline-block h-6 w-6" />
             </Link>
-            <button className='bg-[#2A2F38] font-medium px-6 py-3 text-lg rounded-full'>
-              <Link href="/saved-equipments">
-              <BookmarkCheckIcon className="text-white h-6 w-6" />
-              </Link>
-            </button>
-            <button className='text-white bg-[#2A2F38] font-medium px-3 py-3 text-lg rounded-full'>
-              <Link href='/settings'>
-              <FaUserCircle className="text-white h-6 w-6 t" />
-              </Link>
-            </button>
-            
-            <Link 
-              href="/settings"
-              className="text-white"
-            >
-              Complete Profile
-            </Link>
-            
           </nav>
 
           {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-white p-2"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? (
-              <HiX className="h-6 w-6" />
-            ) : (
-              <HiMenu className="h-6 w-6" />
-            )}
-          </button>
+          <div className="md:hidden">
+            <button onClick={toggleMenu} className="text-white focus:outline-none">
+              {isMenuOpen ? <HiX className="h-6 w-6" /> : <HiMenu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 space-y-4">
-            <Link 
-              to="/saved-equipments"
-              className="block text-white bg-[#2A2F38] font-medium px-6 py-3 text-lg rounded-full"
-            >
+          <div className="md:hidden mt-4 space-y-2">
+            <Link href="/my-listings" className="block text-white bg-[#2A2F38] font-medium px-6 py-3 text-lg rounded-full">
               My Listings
             </Link>
-            <Link 
-              to="/login"
-              className="block text-white bg-[#2A2F38] font-medium px-6 py-3 text-lg rounded-full"
-            >
-              Login
-            </Link>
-            <Link 
-              to="/settings"
-              className="block text-white bg-[#2A2F38] font-medium px-6 py-3 text-lg rounded-full"
-            >
-              Home
-            </Link>
-          </nav>
+            <Link href="/" className="block text-white hover:text-gray-300">Home</Link>
+            <Link href="/about" className="block text-white hover:text-gray-300">About</Link>
+            <Link href="/contact" className="block text-white hover:text-gray-300">Contact</Link>
+            <Link href="/profile" className="block text-white hover:text-gray-300">Profile</Link>
+          </div>
         )}
       </div>
     </header>
