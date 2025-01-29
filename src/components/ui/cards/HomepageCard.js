@@ -92,15 +92,15 @@ export const cardData = [
 ];
 
 export default function Card() {
-    // const dispatch = useDispatch();
-    // const { equipments, loading, error } = useSelector((state) => state.equipments);
+    const dispatch = useDispatch();
+    const { equipments, loading, error } = useSelector((state) => state.equipments);
 
-    // useEffect(() => {
-    //     dispatch(fetchEquipments());
-    // }, [dispatch]);
+    useEffect(() => {
+        dispatch(fetchEquipments());
+    }, [dispatch]);
 
-    // if (loading) return <div>Loading...</div>;
-    // if (error) return <div>Error: {error}</div>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
 
 
     return (
@@ -109,20 +109,24 @@ export default function Card() {
        
         <div className="grid grid-cols-1 mx-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8">
             
-        {cardData.map((card, index) => (
+        {equipments.map((card, index) => (
             <div key={index} className="relative rounded-lg overflow-hidden shadow-lg bg-white">
-                <Link href={`equipment-detail/${card.slug}`}>
+                <Link href={`equipment-detail/${card._id}`}>
                     <div className="relative">
-                        <img 
+                    <img 
                             className="w-full h-48 object-cover rounded-t-lg" 
-                            src='/future.jpeg' 
-                            alt={card.name} 
+                            src={card.coverimage || '/future.jpeg'} // Use coverimage URL with fallback
+                            alt={card.name}
+                            onError={(e) => {
+                                e.target.onerror = null; 
+                                e.target.src = '/future.jpeg';
+                            }}
                         />
                         <button 
                             className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
                             onClick={(e) => {
                                 e.preventDefault();
-                                // Add bookmark functionality here
+                             
                             }}
                         >
                             <BsBookmark className="h-5 w-5 text-gray-700" />

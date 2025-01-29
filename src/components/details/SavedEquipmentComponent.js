@@ -32,7 +32,7 @@ export default function SavedEquipmentComponent({ savedItems }) {
               <h2 className="text-xl text-gray-600">Cost</h2>
               <h2 className="text-lg font-medium mt-2">{item.cost.toLocaleString()} NGN</h2>
               <p className="text-sm text-gray-500">Negotiable</p>
-              <EquipmentInfo make='202' year='200' location='port harcut' brand='model' color='pin' />
+              {/* <EquipmentInfo make='202' year='200' location='port harcut' color='pin' /> */}
             </div>
           </div>
         </div>

@@ -13,7 +13,6 @@ const initialState = {
 
 console.log('This is the base url:', BASEURL);
 
-// Async thunks
 export const fetchEquipments = createAsyncThunk(
   'equipments/fetchEquipments',
   async (_, { rejectWithValue }) => {
@@ -128,7 +127,6 @@ export const addEquipment = createAsyncThunk(
           'Authorization': `Bearer ${token}`
         }
       };
-
       console.log('FormData contents in reducer:');
       for (let pair of formData.entries()) {
         console.log(pair[0], pair[1]);

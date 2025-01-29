@@ -1,6 +1,17 @@
 {
-  "/page": "app/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/chat/page": "app/chat/page.js",
+  "/equipment-detail/[slug]/page": "app/equipment-detail/[slug]/page.js",
+  "/list-equipment/page": "app/list-equipment/page.js",
+  "/forgot-password/page": "app/forgot-password/page.js",
   "/login/page": "app/login/page.js",
+  "/my-listings/page": "app/my-listings/page.js",
+  "/offers/page": "app/offers/page.js",
+  "/page": "app/page.js",
+  "/saved-equipments/page": "app/saved-equipments/page.js",
   "/settings/page": "app/settings/page.js",
-  "/list-equipment/page": "app/list-equipment/page.js"
+  "/signup-confirmation/page": "app/signup-confirmation/page.js",
+  "/signup/page": "app/signup/page.js",
+  "/password-recovery/page": "app/password-recovery/page.js"
 }

@@ -10,42 +10,51 @@ import PriceInfo from '@/components/details/PriceInfo';
 import RelatedItem from '@/components/details/RelatedItems';
 import { cardData } from '@/components/ui/cards/HomepageCard';
 import { useEffect, useState } from 'react';
-import Image from 'next/image'; // Add this if you're using Next.js Image component
+import { useDispatch, useSelector } from 'react-redux';
+import Image from 'next/image'; 
+import { fetchEquipmentById } from '@/redux/reducers/equipmentReducer';
 
 export default function Detail() {
     const params = useParams();
-    const [equipment, setEquipment] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false);
+    const { selectedEquipment: equipment, error } = useSelector(state => state.equipments);
+    console.log('The equipment', equipment);
+    console.log('The parma;s', params)
 
     useEffect(() => {
-        if (params.slug) {
+        const fetchEquipment = async () => {
+            const id = params?.slug;
+            console.log('the params is this', id)
+        if(!id) {
+            console.error('No equipment id was foind');
+            return;
+        }   
+        if (id) {
+
             try {
-                const foundEquipment = cardData.find(item => item.slug === params.slug);
-                setEquipment(foundEquipment);
+                setIsLoading(true);
+                const result = await dispatch(fetchEquipmentById(id)).unwrap();
+                console.log('Dispatch result:', result);
             } catch (error) {
                 console.error('Error finding equipment:', error);
             } finally {
                 setIsLoading(false);
             }
         }
-    }, [params.slug]);
-
+    };
+    
+        fetchEquipment();
+    
+    }, [dispatch, params?.slug]);
+    if (error) return <div>Error: {error}</div>;
     if (isLoading) {
         return <div>Loading...</div>;
     }
+    if (!equipment) return <div>Equipment not found</div>;
 
-    if (!equipment) {
-        return <div>Equipment not found</div>;
-    }
 
-    // Ensure image URLs are valid
-    const mainImage = equipment.image?.startsWith('/') 
-        ? equipment.image 
-        : `/${equipment.image}`; // Add leading slash if missing
 
-    const { price, title, description, availability, slug } = equipment;
-
-    // Ensure related item images are valid URLs
     const relatedItems = [
         {
             image: '/future.jpeg', // Ensure this path exists in your public folder
@@ -62,23 +71,18 @@ export default function Detail() {
     return (
         <Layout>
             <ImageGallery 
-                mainImage={mainImage} 
-                thumbnails={[mainImage, mainImage]} // Use the validated mainImage
+                equipment={equipment} 
+                // thumbnails={[mainImage, mainImage]} // Use the validated mainImage
                 width={500} 
                 height={500} 
-                price={price} 
+                price={equipment.price} 
                 negotiable={true} 
             />
             <div className="grid grid-cols-3 gap-8 mt-8 rounded-lg shadow p-4">
                 <div className="col-span-2">
-                    <EquipmentInfo 
-                        title={title} 
-                        location="Port Harcourt, Rumuola" 
-                        brand="Some Brand" 
-                        color="Yellow" 
-                        year="2022" 
+                    <EquipmentInfo equipment={equipment}
                     />
-                    <Description description={description} />
+                    <Description equipment={equipment} />
                 </div>
                
             </div>

@@ -20,11 +20,12 @@ export default function EquipmentForm() {
   const [previewImages, setPreviewImages] = useState([]);
   const dispatch = useDispatch();
   const [token, setToken] = useState(null);
-  const [userId, setUserId] = useState(null);
   const router = useRouter();
   const { loading } = useSelector((state) => state.equipment || {});
-  const state = useSelector(state => state);
-  console.log('User ID:', state);
+  const { user } = useSelector(state => state.auth);
+  const userId = user?._id;
+  console.log('the user i need', user?._id);
+ 
 
 
   const {
@@ -55,7 +56,7 @@ export default function EquipmentForm() {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
-    const storedUserId = localStorage.getItem('userId'); 
+   
   
     if (!storedToken) {
       router.push('/login');
@@ -64,7 +65,7 @@ export default function EquipmentForm() {
     }
   
     setToken(storedToken);
-    setUserId(storedUserId);
+   
   }, [router]);
   
 
@@ -134,7 +135,8 @@ export default function EquipmentForm() {
     try {
       console.log('Raw form data:', data);
       const formData = new FormData();
-      const userId = "6798e8a28eacebb41f667db3"
+      // const userId = '6798e8a28eacebb41f667db3';
+      console.log('I like the id:', userId);
       formData.append('userId', userId);
       formData.append('location', data.location);
       // formData.append('category', data.category);
@@ -548,7 +550,7 @@ export default function EquipmentForm() {
             <button
               type="button"
               onClick={() => setStep(step + 1)}
-              className="ml-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600"
+              className="ml-auto px-4 py-2 text-sm font-medium text-white bg-gray-500 rounded-md hover:bg-blue-600"
             >
               Next
             </button>
@@ -557,7 +559,7 @@ export default function EquipmentForm() {
               type="submit"
               disabled={loading}
               className={`ml-auto px-4 py-2 text-sm font-medium text-white rounded-md flex items-center
-                ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
+                ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-gray-500 hover:bg-gray-600'}`}
             >
               {loading ? (
                 <>

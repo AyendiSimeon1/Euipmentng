@@ -149,9 +149,9 @@ const ListingSummary = ({
           <button className="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
             Download a pdf Copy
           </button>
-          <button className="w-full py-2 px-4 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
+          {/* <button className="w-full py-2 px-4 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
             Go ahead and List
-          </button>
+          </button> */}
         </div>
       </div>
   );
