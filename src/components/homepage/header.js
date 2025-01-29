@@ -54,12 +54,12 @@ const Header = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden mt-4 space-y-2">
+          <div className="md:hidden mt-4 bg-gray-700 rounded-lg p-4 space-y-4 transition-all duration-200 ease-in-out">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`block text-white hover:text-gray-300 ${link.className || ''}`}
+                className={`block text-white hover:text-gray-300 px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors ${link.className || ''}`}
               >
                 {link.label}
               </Link>

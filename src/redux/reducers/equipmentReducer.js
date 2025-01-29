@@ -134,7 +134,7 @@ export const addEquipment = createAsyncThunk(
 
 
       const response = await axios.post(
-        `https://${BASEURL}/equipment/addequipment`,
+        `http://${BASEURL}/equipment/addequipment`,
         formData,
         config
       );
