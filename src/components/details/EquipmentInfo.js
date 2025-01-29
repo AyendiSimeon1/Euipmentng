@@ -3,7 +3,7 @@ export default function EquipmentInfo ({ equipment }) {
     return (
         <div>
        
-            <div className="flex">
+       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div>
                     <p className=""><strong>Make </strong></p>
                     <p>Auto Bold</p> 

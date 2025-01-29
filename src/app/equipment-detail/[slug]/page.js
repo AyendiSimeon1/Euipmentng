@@ -70,6 +70,7 @@ export default function Detail() {
 
     return (
         <Layout>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <ImageGallery 
                 equipment={equipment} 
                 // thumbnails={[mainImage, mainImage]} // Use the validated mainImage
@@ -86,7 +87,10 @@ export default function Detail() {
                 </div>
                
             </div>
-            <RelatedItem items={relatedItems} />
+            <div className="mt-8">
+                <RelatedItem items={relatedItems} />
+            </div>
+            </div>
         </Layout>
     );
 }
