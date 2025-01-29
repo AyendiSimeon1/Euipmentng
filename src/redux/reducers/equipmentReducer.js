@@ -120,26 +120,24 @@ export const configureFormData = (equipmentData) => {
 
 export const addEquipment = createAsyncThunk(
   'equipments/addEquipment',
-  async (formDataObj, { rejectWithValue }) => {
+  async ({formData, token}, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem('token');
       
-      if (!token) {
-        return rejectWithValue({ message: 'No authentication token found' });
-      }
-
       const config = {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Authorization': `Bearer ${token}`
         }
       };
 
-      console.log('Sending equipment data:', formDataObj);
+      console.log('FormData contents in reducer:');
+      for (let pair of formData.entries()) {
+        console.log(pair[0], pair[1]);
+      }
+
 
       const response = await axios.post(
         `https://${BASEURL}/equipment/addequipment`,
-        formDataObj,
+        formData,
         config
       );
 

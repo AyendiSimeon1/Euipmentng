@@ -55,10 +55,10 @@ export default function Hero() {
             </div>
             <div className="p-4 sm:p-6">
                 <div
-                    className="mt-12 mx-4 sm:mx-12 mb-8 border bg-gradient-to-r from-gray-900 via-gray-800 to-gray-500 rounded-lg shadow bg-cover bg-center space-y-4"
+                    className="mt-12 mx-4 sm:mx-12 mb-8 border bg-gradient-to-r from-gray-300 via-gray-300 to-gray-100 rounded-lg shadow bg-cover bg-center space-y-4"
                     style={{ backgroundImage: "url('future.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
                 >
-                    <div className="bg-black bg-opacity-90 p-6 rounded-lg min-h-[300px]">
+                    <div className="bg-black bg-opacity-50 p-6 rounded-lg min-h-[300px]">
                         <h2 className="font-bold text-3xl sm:text-4xl text-white mx-4 sm:mx-8 mt-4 sm:mt-6">
                             List your Items on Equipments.ng
                         </h2>

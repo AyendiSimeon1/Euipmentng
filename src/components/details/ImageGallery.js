@@ -12,7 +12,14 @@ export default function ImageGallery ({ mainImage, thumbnails, width, height, pr
                     <Image key={index} src={thumb} alt={`Thumbnail ${index}`} className="rounded-lg shadow w-full" width={width} height={height} />
                 ) )}
 
-                <PriceInfo price={price} negotiable={negotiable}  />
+                <PriceInfo 
+                price={500}
+                negotiable={true}
+                ownerName="Jackson and Family International"
+                location="Port Harcourt, Rumuola"
+                phone="+2348000000000"
+                email="Jacksonandfamily@gmail.com"
+                />
             </div>  
         </div>
     );

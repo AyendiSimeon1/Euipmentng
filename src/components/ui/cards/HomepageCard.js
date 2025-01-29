@@ -104,7 +104,11 @@ export default function Card() {
 
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8">
+        <div>
+            <h2 className='font-bold text-xl ml-10 px-2 py-3'>Listed Equipments </h2>
+       
+        <div className="grid grid-cols-1 mx-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-4 sm:px-6 lg:px-8">
+            
         {cardData.map((card, index) => (
             <div key={index} className="relative rounded-lg overflow-hidden shadow-lg bg-white">
                 <Link href={`equipment-detail/${card.slug}`}>
@@ -147,6 +151,7 @@ export default function Card() {
                 </Link>
             </div>
         ))}
+    </div>
     </div>
     );
 }

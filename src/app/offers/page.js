@@ -1,4 +1,4 @@
-import EquipmentOffers from '@/components/listing/Offers';
+import Offers from '@/components/listing/Offers';
 
 const metadata = {
     title: 'Equiments.ng | Offers',
@@ -7,6 +7,6 @@ const metadata = {
   
 export default function OffersPage () {
     return (
-        <EquipmentOffers />
+        <Offers />
     )
 }

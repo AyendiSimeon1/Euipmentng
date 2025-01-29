@@ -1,184 +1,93 @@
-import React from 'react';
-import { Trash2, MessageCircle } from 'lucide-react';
+import Image from 'next/image';
 
-export default function EquipmentOffers () {
-  const equipment = {
-    title: "Steel Pipelines Cables",
-    location: "Port Harcourt, Rumukola",
-    cost: "20,000,000",
-    isNegotiable: true,
-    stats: {
-      unreadOffers: 2,
-      totalOffers: 24
+export default function Offers() {
+  const offers = [
+    {
+      id: 1,
+      companyName: 'Jackson and Family International',
+      location: 'Port Harcourt, Rumuola',
+      contactInfo: '+908367438930',
+      proposedPrice: '20,000,000',
+      total: '80,000,000',
+      date: '21 January - 2 February',
     },
-    details: {
-      make: "Port Harcourt, Rumukola",
-      brand: "Port Harcourt, Rumukola",
-      model: "Port Harcourt, Rumukola",
-      yearOfManufacture: "Port Harcourt, Rumukola",
+    {
+      id: 2,
+      companyName: 'Jackson and Family International',
+      location: 'Port Harcourt, Rumuola',
+      contactInfo: '+908367438930',
+      proposedPrice: '20,000,000',
+      total: '80,000,000',
+      date: '21 January - 2 February',
     },
-    paymentMethod: "Pay On Delivery",
-    condition: "Brand New",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu magna rhoncus, dictum est a, mattis felis. Sed sagittis, velit eu tempus accumsan, risus sem tristique lectus, quis ullamcorper tortor libero sed velit.",
-    accessories: ["Lights", "Crane hook", "Crane hook", "Crane hook", "Crane hook"],
-    certificates: [
-      "Certificate of use",
-      "Certificate of use",
-      "Certificate of use",
-      "Certificate of use",
-      "Certificate of use"
-    ]
-  };
+  ];
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
- 
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center space-x-2">
-          <div className="h-8 w-8 bg-yellow-500 rounded-full"></div>
-          <button className="px-4 py-1 text-sm bg-gray-200 rounded-full">
-            Complete Profile
-          </button>
-        </div>
-        <div className="flex items-center space-x-4">
-          <button className="p-2">
-            <MessageCircle className="h-6 w-6 text-gray-600" />
-          </button>
-          <div className="h-8 w-8 bg-gray-300 rounded-full"></div>
-        </div>
-      </div>
-
-
-      <div className="grid grid-cols-4 gap-4 mb-8">
-        <div className="col-span-3">
-          <img
-            src="/api/placeholder/800/400"
-            alt="Equipment main"
-            className="w-full h-[400px] object-cover rounded-lg"
-          />
-        </div>
-        <div className="space-y-4">
-          {[1, 2, 3].map((index) => (
-            <img
-              key={index}
-              src="/api/placeholder/200/120"
-              alt={`Thumbnail ${index}`}
-              className="w-full h-[120px] object-cover rounded-lg"
-            />
-          ))}
-        </div>
-      </div>
-
-    
-      <div className="flex items-center space-x-6 mb-6">
-        <div className="flex items-center space-x-2">
-          <MessageCircle className="h-5 w-5 text-gray-600" />
-          <span className="text-sm text-gray-600">{equipment.stats.unreadOffers} Unread Offers</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <MessageCircle className="h-5 w-5 text-gray-600" />
-          <span className="text-sm text-gray-600">{equipment.stats.totalOffers} Total Offers</span>
-        </div>
-      </div>
-
-   
-      <div className="space-y-2 mb-8">
-        <button className="w-full py-2 text-center border border-gray-300 rounded-lg">
-          Edit Listing
-        </button>
-        <button className="w-full py-2 text-center bg-gray-600 text-white rounded-lg">
-          Delete Listing
-        </button>
-      </div>
-
-    
+    <div className="min-h-screen bg-gray-100 px-4 py-6 md:px-12">
+      <h1 className="text-xl md:text-2xl font-semibold text-center text-gray-800 mb-6">
+        Offers for Steel Pipelines Cables
+      </h1>
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-semibold mb-1">{equipment.title}</h1>
-          <p className="text-gray-600">{equipment.location}</p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8">
-          <div>
-            <h2 className="font-medium mb-2">Cost</h2>
-            <p className="text-2xl font-semibold mb-1">{equipment.cost}</p>
-            {equipment.isNegotiable && (
-              <span className="text-gray-600">Negotiable</span>
-            )}
-          </div>
-          
-          <div>
-            <div className="mb-4">
-              <h2 className="font-medium mb-2">Payment Method</h2>
-              <div className="flex items-center space-x-2">
-                <input type="checkbox" checked readOnly className="rounded" />
-                <span>Pay On Delivery</span>
+        {offers.map((offer) => (
+          <div
+            key={offer.id}
+            className="bg-white shadow-md rounded-xl p-4 md:p-6 space-y-4"
+          >
+            <div className="flex items-start md:items-center md:space-x-4 flex-col md:flex-row">
+              <div className="flex-shrink-0 mb-4 md:mb-0">
+                <Image
+                  src="/images/company-logo.png"
+                  alt="Company Logo"
+                  width={80}
+                  height={80}
+                  className="rounded-full"
+                />
+              </div>
+              <div className="flex-grow">
+                <h2 className="text-lg font-semibold text-gray-800">
+                  {offer.companyName}
+                </h2>
+                <p className="text-sm text-gray-500">{offer.location}</p>
+                <p className="text-sm text-gray-500">{offer.contactInfo}</p>
               </div>
             </div>
-            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p className="text-sm text-gray-500">Proposed Price</p>
+                <p className="text-lg font-medium text-gray-800">
+                  {offer.proposedPrice} <span className="text-sm">Per day</span>
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-500">Date</p>
+                <p className="text-lg font-medium text-gray-800">
+                  {offer.date}
+                </p>
+              </div>
+            </div>
             <div>
-              <h2 className="font-medium mb-2">Working Condition</h2>
-              <div className="flex items-center space-x-2">
-                <input type="checkbox" checked readOnly className="rounded" />
-                <span>Brand New</span>
-              </div>
+              <p className="text-sm text-gray-500">Total</p>
+              <p className="text-2xl font-bold text-gray-900">
+                {offer.total}{' '}
+                <span className="text-base font-medium text-gray-600">
+                  Per day
+                </span>
+              </p>
+            </div>
+            <div className="flex justify-between mt-4 space-x-2">
+              <button className="bg-gray-900 text-white rounded-lg py-2 px-4 text-sm hover:bg-gray-700">
+                Accept Offer
+              </button>
+              <button className="bg-gray-300 text-gray-800 rounded-lg py-2 px-4 text-sm hover:bg-gray-400">
+                Reject Offer
+              </button>
+              <button className="border border-gray-400 text-gray-800 rounded-lg py-2 px-4 text-sm hover:border-gray-500">
+                Contact Lessee
+              </button>
             </div>
           </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-8">
-          <div>
-            <h2 className="font-medium mb-2">Make</h2>
-            <p>{equipment.details.make}</p>
-          </div>
-          <div>
-            <h2 className="font-medium mb-2">Brand</h2>
-            <p>{equipment.details.brand}</p>
-          </div>
-          <div>
-            <h2 className="font-medium mb-2">Model</h2>
-            <p>{equipment.details.model}</p>
-          </div>
-          <div>
-            <h2 className="font-medium mb-2">Year of Manufacture</h2>
-            <p>{equipment.details.yearOfManufacture}</p>
-          </div>
-        </div>
-
-        <div>
-          <h2 className="font-medium mb-2">Description</h2>
-          <p className="text-gray-600">{equipment.description}</p>
-        </div>
-
-        <div>
-          <h2 className="font-medium mb-2">Accessories</h2>
-          <div className="flex flex-wrap gap-2">
-            {equipment.accessories.map((accessory, index) => (
-              <span
-                key={index}
-                className="px-3 py-1 bg-gray-100 rounded-full text-sm"
-              >
-                {accessory}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h2 className="font-medium mb-2">Certificates</h2>
-          <div className="space-y-2">
-            {equipment.certificates.map((certificate, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
-              >
-                <span>{certificate}</span>
-                <Trash2 className="h-5 w-5 text-gray-400" />
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
-};
+}
