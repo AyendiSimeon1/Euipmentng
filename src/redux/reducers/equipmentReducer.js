@@ -2,13 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BASEURL } from '@/utils/config';
 
-// Initial state
+
 const initialState = {
   equipments: [],
+  favorites: [],
   selectedEquipment: null,
   loading: false,
   error: null,
-  message: null
+  message: null,
+  offers: [],
+  currentOffer: null,
 };
 
 console.log('This is the base url:', BASEURL);
@@ -109,7 +112,7 @@ export const addToFavorites = createAsyncThunk(
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `https://${BASEURL}/userfavorite/addfavorite`,
+        `https://${BASEURL}/offer/makeoffer`,
         { equipmentId },
         {
           headers: { 'Authorization': `Bearer ${token}` }
@@ -158,6 +161,38 @@ export const removeFromFavorites = createAsyncThunk(
   }
 );
 
+export const makeOffer = createAsyncThunk(
+  'equipments/makeOffer',
+  async (offerData, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      console.log('Making offer with data:', offerData); // Debug log
+
+      if (!token) {
+        throw new Error('No authentication token found');
+      }
+
+      const response = await axios.post(
+        `https://${BASEURL}/offer/makeoffer`,
+        offerData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      
+      console.log('Offer response:', response.data); // Debug log
+      return response.data;
+    } catch (error) {
+      console.error('Offer error:', error); // Debug log
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+
 const equipmentsSlice = createSlice({
   name: 'equipments',
   initialState,
@@ -165,11 +200,14 @@ const equipmentsSlice = createSlice({
     clearEquipmentState: (state) => {
       state.error = null;
       state.message = null;
+    },
+    clearCurrentOffer: (state) => {
+      state.currentOffer = null;
     }
   },
   extraReducers: (builder) => {
     builder
-      // Fetch all equipments
+      
       .addCase(fetchEquipments.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -239,7 +277,7 @@ const equipmentsSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Fetch favorites
+   
       .addCase(fetchUserFavorites.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -253,7 +291,7 @@ const equipmentsSlice = createSlice({
         state.error = action.payload;
       })
 
-      // Remove from favorites
+     
       .addCase(removeFromFavorites.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -268,9 +306,25 @@ const equipmentsSlice = createSlice({
       .addCase(removeFromFavorites.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-  });
+      })
+     
+    
+      .addCase(makeOffer.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(makeOffer.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentOffer = action.payload.offer;
+        state.message = action.payload.message;
+        state.offers.push(action.payload.offer);
+      })
+      .addCase(makeOffer.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   }
 });
 
-export const { clearEquipmentState } = equipmentsSlice.actions;
+export const { clearEquipmentState, clearCurrentOffer } = equipmentsSlice.actions;
 export default equipmentsSlice.reducer;

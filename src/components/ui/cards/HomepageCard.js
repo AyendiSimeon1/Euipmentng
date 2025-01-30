@@ -5,6 +5,7 @@ import { fetchEquipments } from '@/redux/reducers/equipmentReducer';
 import Link from 'next/link';
 import { BsBookmark } from 'react-icons/bs';  
 import { AlertCircle, RefreshCcw } from 'lucide-react';
+import { addToFavorites } from '@/redux/reducers/equipmentReducer';
 
 const slugify = (string) => {
     return string
