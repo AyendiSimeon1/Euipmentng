@@ -1,11 +1,15 @@
 "use client";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEquipments } from '@/redux/reducers/equipmentReducer';
 import Link from 'next/link';
-import { BsBookmark } from 'react-icons/bs';  
+// import { BsBookmark } from 'react-icons/bs';  
 import { AlertCircle, RefreshCcw } from 'lucide-react';
 import { addToFavorites } from '@/redux/reducers/equipmentReducer';
+import { useForm } from 'react-hook-form';
+import { toast, ToastContainer } from 'react-toastify';
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
+import { Loader2, CheckCircle } from 'lucide-react';
 
 const slugify = (string) => {
     return string
@@ -95,10 +99,42 @@ export const cardData = [
 export default function Card() {
     const dispatch = useDispatch();
     const { equipments, loading, error } = useSelector((state) => state.equipments);
+    const [loadingFavorites, setLoadingFavorites] = useState({});
+  const [successFavorites, setSuccessFavorites] = useState({});
+  
+    const { favorites } = useSelector(state => state.equipments);
+ 
+    
+
 
     useEffect(() => {
         dispatch(fetchEquipments());
     }, [dispatch]);
+
+    const {
+        handleSubmit,
+        formState: { errors, isSubmitting }
+    } = useForm ();
+    
+    const onSubmit = async (_id) => {
+        try {
+            setLoadingFavorites(prev => ({ ...prev, [equipmentId]: true }));
+      setSuccessFavorites(prev => ({ ...prev, [equipmentId]: false }));
+      
+      const resultAction = await dispatch(addToFavorites(equipmentId));
+      
+      if (addToFavorites.fulfilled.match(resultAction)) {
+        setSuccessFavorites(prev => ({ ...prev, [equipmentId]: true }));
+        toast.success('Added to favorites');
+      } else {
+        toast.error(resultAction.payload?.message || 'Failed to add to favorites');
+      }
+    } catch (error) {
+      toast.error('Error adding to favorites');
+    } finally {
+      setLoadingFavorites(prev => ({ ...prev, [equipmentId]: false }));
+    }
+    }
 
     if (loading) {
         return (
@@ -153,15 +189,24 @@ export default function Card() {
                                 e.target.src = '/future.jpeg';
                             }}
                         />
-                        <button 
-                            className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
-                            onClick={(e) => {
-                                e.preventDefault();
-                             
-                            }}
-                        >
-                            <BsBookmark className="h-5 w-5 text-gray-700" />
-                        </button>
+                         <form onSubmit={handleSubmit(() => onSubmit(card._id))}>
+                         <button 
+              type="submit"
+              disabled={loadingFavorites[card._id]}
+              className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
+              onClick={(e) => e.preventDefault()}
+            >
+              {loadingFavorites[card._id] ? (
+                <Loader2 className="h-5 w-5 animate-spin text-gray-700" />
+              ) : successFavorites[card._id] ? (
+                <CheckCircle className="h-5 w-5 text-green-500" />
+              ) : favorites.some(fav => fav.equipmentId === card._id) ? (
+                <BsBookmarkFill className="h-5 w-5 text-yellow-500" />
+              ) : (
+                <BsBookmark className="h-5 w-5 text-gray-700" />
+              )}
+            </button>
+                </form>
                     </div>
                     
                     <div className="p-4">
