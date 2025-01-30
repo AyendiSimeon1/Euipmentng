@@ -25,9 +25,9 @@ export default function EquipmentForm() {
   const { user } = useSelector(state => state.auth);
   const userId = user?._id;
   console.log('the user i need', user?._id);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
  
-
-
   const {
     register,
     handleSubmit,
@@ -132,6 +132,9 @@ export default function EquipmentForm() {
   };
 
   const onSubmit = async (data) => {
+    if (step !== 4) {
+      return;
+    }
     try {
       console.log('Raw form data:', data);
       const formData = new FormData();

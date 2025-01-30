@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEquipments } from '@/redux/reducers/equipmentReducer';
 import Link from 'next/link';
 import { BsBookmark } from 'react-icons/bs';  
-
+import { AlertCircle, RefreshCcw } from 'lucide-react';
 
 const slugify = (string) => {
     return string
@@ -99,8 +99,38 @@ export default function Card() {
         dispatch(fetchEquipments());
     }, [dispatch]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) {
+        return (
+          <div className="flex flex-col items-center justify-center min-h-[200px] space-y-4">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2A2F38]"></div>
+            <p className="text-gray-600 text-sm">Loading equipment...</p>
+          </div>
+        );
+      }
+      if (error) {
+        return (
+          <div className="flex flex-col items-center justify-center min-h-[400px] p-4">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md w-full">
+              <div className="flex items-center space-x-3">
+                <AlertCircle className="h-6 w-6 text-red-500" />
+                <h3 className="text-lg font-medium text-red-800">Error Loading Equipment</h3>
+              </div>
+              
+              <p className="mt-2 text-sm text-red-700">
+                {error?.message || 'Something went wrong. Please try again.'}
+              </p>
+              
+              <button
+                onClick={() => dispatch(fetchEquipments())}
+                className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              >
+                <RefreshCcw className="h-4 w-4 mr-2" />
+                Try Again
+              </button>
+            </div>
+          </div>
+        );
+      }
 
 
     return (
@@ -134,9 +164,14 @@ export default function Card() {
                     </div>
                     
                     <div className="p-4">
-                        <div className="flex flex-col space-y-2">
-                            <div className="text-2xl sm:text-3xl font-bold text-gray-800">
+                        <div className="flex flex-col space-y-1">
+                            <div className="flex justify-between">
+                            <div className="text-sm sm:text-sm font-bold text-gray-800">
                                 {card.amount}
+                            </div>
+                            <div className=''>
+                                <p>per/day</p>
+                            </div>
                             </div>
                             <div className="text-sm text-gray-500">
                                 {card.duration}
@@ -149,6 +184,9 @@ export default function Card() {
                             </div>
                             <div className="text-sm text-gray-600 font-semibold">
                                 {card.workingcondition}
+                            </div>
+                            <div className="text-sm text-gray-600 font-semibold">
+                               <p>Avalaibilty: Immediately</p>
                             </div>
                         </div>
                     </div>

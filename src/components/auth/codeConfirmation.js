@@ -24,7 +24,7 @@ export default function ForgotPassword() {
             
             if (forgotPassword.fulfilled.match(resultAction)) {
                 toast.success(resultAction.payload.message);
-                router.push('/password-recovery');
+                router.push(`/password-recovery?email=${encodeURIComponent(data.email)}`);
             }
             
             if (forgotPassword.rejected.match(resultAction)) {
@@ -46,10 +46,10 @@ export default function ForgotPassword() {
                     className="!font-sans"
                 />
                 <h1 className="text-center text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
-                    Check your email for code
+                    Forgot Password?
                 </h1>
                 <p className="text-center text-sm sm:text-base font-medium pt-2 mt-2 px-4 sm:px-0">
-                    A code has been sent to your email, input it to complete your registration
+                    A code will be sent to your email to reset your password
                 </p>
             </div>
             
@@ -76,25 +76,7 @@ export default function ForgotPassword() {
                             )}
                         </div>
                         
-                        <div>
-                            <input
-                                {...register('code', {
-                                    required: 'Verification code is required',
-                                    pattern: {
-                                        value: /^[0-9]{6}$/,
-                                        message: 'Please enter a valid 6-digit code'
-                                    }
-                                })}
-                                type="text"
-                                placeholder="Code"
-                                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2.5 sm:py-2 text-base sm:text-sm shadow-sm focus:border-[#2A2F38] focus:outline-none focus:ring-yellow-500"
-                            />
-                            {errors.code && (
-                                <p className="mt-1 text-xs sm:text-sm text-red-600">
-                                    {errors.code.message}
-                                </p>
-                            )}
-                        </div>
+                       
                         
                         <button
                             type="submit"

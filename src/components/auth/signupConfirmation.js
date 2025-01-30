@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { verifyOTP } from '@/redux/reducers/authReducers';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from 'next/link';
 
 export default function SignupConfirmation() {
     const dispatch = useDispatch();
+    const searchParams = useSearchParams();
+    const email = searchParams.get('email');
     const router = useRouter();
     const { loading, error } = useSelector((state) => state.auth);
-
+    console.log('The email:', email);
     const {
         register,
         handleSubmit,
@@ -21,7 +23,7 @@ export default function SignupConfirmation() {
     const onSubmit = async (data) => {
         try {
             const verificationData = {
-                email: data.email,
+                email: email,
                 otp: data.code
             };
             
@@ -67,25 +69,7 @@ export default function SignupConfirmation() {
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                        <div>
-                            <input
-                                {...register('email', {
-                                    required: 'Email is required',
-                                    pattern: {
-                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: 'Invalid email address'
-                                    }
-                                })}
-                                type="email"
-                                placeholder="Email"
-                                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
-                            />
-                            {errors.email && (
-                                <p className="mt-1 text-sm text-red-600">
-                                    {errors.email.message}
-                                </p>
-                            )}
-                        </div>
+                
                         <div>
                             <input
                                 {...register('code', {

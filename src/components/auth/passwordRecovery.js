@@ -3,26 +3,35 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '@/redux/reducers/authReducers';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { Eye, EyeOff } from 'lucide-react';
 
 export default function PasswordRecovery() {
+    const searchParams = useSearchParams();
+    const email = searchParams.get('email');
     const dispatch = useDispatch();
     const router = useRouter();
     const { loading, error } = useSelector((state) => state.auth);
     const [showPassword, setShowPassword] = useState(false);
+    console.log(email);
 
     const {
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            email: email || '',
+            code: '',
+            password: ''
+        }
+});
 
     const onSubmit = async (data) => {
         try {
             const resetData = {
-                email: data.email,
+                email: email,
                 otp: data.code,
                 newPassword: data.password
             };
@@ -30,7 +39,7 @@ export default function PasswordRecovery() {
             const resultAction = await dispatch(resetPassword(resetData));
             
             if (resetPassword.fulfilled.match(resultAction)) {
-                toast.success(resultAction.payload.message);
+                toast.success(resultAction.payload.message|| 'Pasword resest successful');
                 router.push('/');
             }
             
@@ -56,25 +65,7 @@ export default function PasswordRecovery() {
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                        <div>
-                            <input
-                                {...register('email', {
-                                    required: 'Email is required',
-                                    pattern: {
-                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                        message: 'Invalid email address'
-                                    }
-                                })}
-                                type="email"
-                                placeholder="Email"
-                                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-[#2A2F38] focus:outline-none focus:ring-yellow-500"
-                            />
-                            {errors.email && (
-                                <p className="mt-1 text-sm text-red-600">
-                                    {errors.email.message}
-                                </p>
-                            )}
-                        </div>
+                        
 
                         <div>
                             <input

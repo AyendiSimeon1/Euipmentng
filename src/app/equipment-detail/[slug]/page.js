@@ -79,14 +79,8 @@ export default function Detail() {
                 price={equipment.price} 
                 negotiable={true} 
             />
-            <div className="grid grid-cols-3 gap-8 mt-8 rounded-lg shadow p-4">
-                <div className="col-span-2">
-                    <EquipmentInfo equipment={equipment}
-                    />
-                    <Description equipment={equipment} />
-                </div>
-               
-            </div>
+
+            
             <div className="mt-8">
                 <RelatedItem items={relatedItems} />
             </div>

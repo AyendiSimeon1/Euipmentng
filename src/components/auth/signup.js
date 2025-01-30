@@ -45,7 +45,7 @@ const Signup = () => {
      
       if (signUpUser.fulfilled.match(resultAction)) {
         toast.success(resultAction.payload.message);
-        navigate.push('/signup-confirmation', { state: { email: data.email }});
+        navigate.push(`/signup-confirmation?email=${encodeURIComponent(data.email)}`);
         toast.success('Signup Successful');
       } else {
         toast.error(resultAction.payload?.message || 'Signup failed');

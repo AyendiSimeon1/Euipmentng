@@ -22,27 +22,27 @@ const PriceInfo = () => {
                     / {pricingschedule}
                 </span></p>
         <p className="text-sm text-gray-600">Negotiable </p>
-        <button 
+        <div 
           onClick={() => setIsOfferOpen(true)}
           className="mt-4 w-full bg-gray-500 text-white py-2 rounded-full flex items-center justify-center space-x-2"
         >
           <span>Make an offer</span>
           <PhoneCall size={20} />
-        </button>
-        <button 
+        </div>
+        <div 
           onClick={() => setIsModalOpen(true)}
           className="mt-4 w-full bg-white border border-dark py-2 rounded-full flex items-center justify-center space-x-2"
         >
           <PhoneCall size={20} />
           <span>Contact Owner</span>
           
-        </button>
+        </div>
 
-        <button 
+        <div 
           
           className="mt-2 w-full border border-gray-300 py-2 rounded-full flex items-center justify-center space-x-2"
         >
-          <button>
+          <div>
             <Link href="/chat">
             <div className="flex">
             
@@ -51,9 +51,9 @@ const PriceInfo = () => {
             </div>
             
             </Link>
-          </button>
+          </div>
           
-        </button>
+        </div>
       </div>
 
  
@@ -61,7 +61,7 @@ const PriceInfo = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg w-full max-w-md p-6 relative">
            
-            <button
+            <div
               onClick={() => setIsModalOpen(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
             >
@@ -78,7 +78,7 @@ const PriceInfo = () => {
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
-            </button>
+            </div>
 
             <div className="text-center">
               <h2 className="text-xl text-gray-700 mb-4">Contact Owner</h2>
@@ -115,7 +115,7 @@ const PriceInfo = () => {
                 </div>
               </div>
 
-              <button className="w-full mt-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+              <div className="w-full mt-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
                 Start a Chat
                 <svg 
                   className="w-4 h-4" 
@@ -130,7 +130,7 @@ const PriceInfo = () => {
                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" 
                   />
                 </svg>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@ const PriceInfo = () => {
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
               <div className="bg-white rounded-lg w-full max-w-md p-6 relative">
               
-                <button
+                <div
                   onClick={() => setIsOfferOpen(false)}
                   className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
                 >
@@ -157,7 +157,7 @@ const PriceInfo = () => {
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                </button>
+                </div>
 
                 <div className="text-center">
                   <h2 className="text-xl text-gray-700 mb-4">Make an offer</h2>

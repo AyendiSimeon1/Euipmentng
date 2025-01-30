@@ -1,10 +1,11 @@
 import ForgotPassword from "@/components/auth/passwordRecovery";
+import { Suspense } from 'react';
 
-export const metadata = {
-    title: 'Equiments.ng | Password Recovery',
-    description: 'Password Recovery',
-}
   
 export default function PasswordRecoveryPage() {
-    return <ForgotPassword />
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+        <ForgotPassword />
+        </Suspense>
+    )
 }
