@@ -39,83 +39,7 @@ export const configureFormData = (equipmentData) => {
   };
 };
 
-// export const addEquipment = createAsyncThunk(
-//   'equipments/addEquipment',
-//   async (formDataObj, { rejectWithValue }) => {
-//     try {
-//       const token = localStorage.getItem('token');
-      
-//       if (!token) {
-//         return rejectWithValue({ message: 'No authentication token found' });
-//       }
 
-//       // Create a new FormData instance
-//       const data = new FormData();
-      
-//       // Add each field from formData to the new FormData instance
-//       Object.entries(formDataObj).forEach(([key, value]) => {
-//         if (key === 'images') {
-//           // Handle multiple images
-//           Array.from(value).forEach(image => {
-//             data.append('images', image);
-//           });
-//         } else if (key === 'video') {
-//           // Handle video
-//           if (value) {
-//             data.append('video', value);
-//           }
-//         } else {
-//           // Handle other fields
-//           data.append(key, value);
-//         }
-//       });
-
-//       const config = {
-//         headers: {
-//           'Authorization': `Bearer ${token}`,
-//           'Content-Type': 'multipart/form-data',
-//           'Accept': 'application/json'
-//         },
-//         // timeout: 30000,
-//         maxBodyLength: Infinity,
-//         maxContentLength: Infinity
-//       };
-
-//       console.log('Request config:', {
-//         headers: config.headers,
-//         url: `https://${BASEURL}/equipment/addequipment`
-//       });
-
-//       console.log('Sending request with data:', Object.fromEntries(data));
-
-//       const response = await axios.post(
-//         `https://${BASEURL}/equipment/addequipment`,
-//         data, // Fixed: Send data instead of formDataObj
-//         config
-//       );
-
-//       return response.data;
-//     } catch (error) {
-//       console.error('Add equipment error:', error);
-      
-//       if (error.code === 'ERR_NETWORK') {
-//         return rejectWithValue({ 
-//           message: 'Network error - please check your connection and try again'
-//         });
-//       }
-
-//       if (error.response?.status === 500) {
-//         return rejectWithValue({
-//           message: error.response.data.error || 'Server error occurred'
-//         });
-//       }
-
-//       return rejectWithValue(
-//         error.response?.data || { message: 'Failed to add equipment' }
-//       );
-//     }
-//   }
-// );
 
 export const addEquipment = createAsyncThunk(
   'equipments/addEquipment',
@@ -179,7 +103,61 @@ export const deleteEquipment = createAsyncThunk(
   }
 );
 
-// Slice
+export const addToFavorites = createAsyncThunk(
+  'equipments/addToFavorites',
+  async (equipmentId, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(
+        `https://${BASEURL}/userfavorite/addfavorite`,
+        { equipmentId },
+        {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchUserFavorites = createAsyncThunk(
+  'equipments/fetchUserFavorites',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(
+        `https://${BASEURL}/userfavorite/usersfavorite`,
+        {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const removeFromFavorites = createAsyncThunk(
+  'equipments/removeFromFavorites',
+  async (favoriteId, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(
+        `https://${BASEURL}/userfavorite/deletefavorite/${favoriteId}`,
+        {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }
+      );
+      return { favoriteId, ...response.data };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const equipmentsSlice = createSlice({
   name: 'equipments',
   initialState,
@@ -246,7 +224,51 @@ const equipmentsSlice = createSlice({
       .addCase(deleteEquipment.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || 'Failed to delete equipment';
-      });
+      })
+      .addCase(addToFavorites.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addToFavorites.fulfilled, (state, action) => {
+        state.loading = false;
+        state.favorites.push(action.payload.newFavorite);
+        state.message = action.payload.message;
+      })
+      .addCase(addToFavorites.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Fetch favorites
+      .addCase(fetchUserFavorites.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserFavorites.fulfilled, (state, action) => {
+        state.loading = false;
+        state.favorites = action.payload;
+      })
+      .addCase(fetchUserFavorites.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // Remove from favorites
+      .addCase(removeFromFavorites.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(removeFromFavorites.fulfilled, (state, action) => {
+        state.loading = false;
+        state.favorites = state.favorites.filter(
+          fav => fav._id !== action.payload.favoriteId
+        );
+        state.message = 'Equipment removed from favorites';
+      })
+      .addCase(removeFromFavorites.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+  });
   }
 });
 

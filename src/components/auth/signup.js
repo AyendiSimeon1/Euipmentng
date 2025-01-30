@@ -18,6 +18,7 @@ const Signup = () => {
   const { loading, error } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [accountType, setAccointType] = useState('individual');
 
 
   const {
@@ -68,7 +69,7 @@ const Signup = () => {
 
     <div className="min-h-screen bg-white flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
+        <h2 className="text-center text-2xl font-bold tracking-tight text-gray-900">
           Welcome to Equipment.ng
         </h2>
         <ToastContainer
@@ -83,7 +84,33 @@ const Signup = () => {
       <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            <div>
+          <div className="flex justify-between">
+            <div className='flex justify-center space-x-6'>
+              <label className='flex items-center'>
+                <input
+                  type='radio'
+                  value='individual'
+                  checked={accountType === 'individual'}
+                  onChange={(e) => setAccointType(e.target.value)}
+                  className='form-radio h-4 w-4 text-[#2A2F38] border-gray-300 focus:ring-[#2A2F38] checked:bg-[#2A2F38] checked:hover:bg-[#2A2F38] checked:focus:bg-[#2A2F38]'
+                />
+                <span className='ml-2 font-bold text-gray-600'>Individual</span>
+              </label>
+            </div>
+            <div className='flex justify-center space-x-6'>
+            <label className='flex items-center'>
+              <input
+                type='radio'
+                value='company'
+                checked={accountType === 'company'}
+                onChange={(e) => setAccointType(e.target.value)}
+                className='form-radio h-4 w-4 text-gray-600'
+              />
+              <span className='ml-2 font-bold text-gray-600'>Company</span>
+            </label>
+          </div>
+          </div>
+            <div className=''>
               <input
                 {...register('surname', { required: 'Surname is required' })}
                 type="text"
@@ -124,7 +151,26 @@ const Signup = () => {
                 <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
               )}
             </div>
-
+            {accountType === 'company' && (
+              <>
+              <div>
+                
+                <input
+                  {...register('companyname', { required: accountType === 'company' })}
+                  placeholder='Company Name'
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                />
+              </div>
+              <div>
+                
+                <input
+                  {...register('designation', { required: accountType === 'company' })}
+                  placeholder='Designation'
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                />
+              </div>
+            </>
+            )}
             <div>
               <div className="relative">
                 <input
