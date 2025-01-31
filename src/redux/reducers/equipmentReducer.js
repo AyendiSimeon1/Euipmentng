@@ -6,6 +6,7 @@ import { BASEURL } from '@/utils/config';
 const initialState = {
   equipments: [],
   favorites: [],
+  userListedEquipment: [],
   selectedEquipment: null,
   loading: false,
   error: null,
@@ -29,7 +30,8 @@ export const fetchEquipments = createAsyncThunk(
 );
 
 export const configureFormData = (equipmentData) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getI
+  tem('token');
   
   return {
     method: 'POST',
@@ -193,6 +195,22 @@ export const makeOffer = createAsyncThunk(
   }
 );
 
+export const fetchUserListedEquipment = createAsyncThunk(
+  'equipments/fetchUserListedEquipment',
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`https://${BASEURL}/equipment/userslistedequipment`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return response.data.userlistedequipment;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const equipmentsSlice = createSlice({
   name: 'equipments',
@@ -204,8 +222,13 @@ const equipmentsSlice = createSlice({
     },
     clearCurrentOffer: (state) => {
       state.currentOffer = null;
-    }
+    },
+    
   },
+  
+    clearUserListedEquipment: (state) => {
+      state.userListedEquipment = [];
+    },
   extraReducers: (builder) => {
     builder
       
@@ -323,9 +346,27 @@ const equipmentsSlice = createSlice({
       .addCase(makeOffer.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(fetchUserListedEquipment.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserListedEquipment.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userListedEquipment = action.payload;
+      })
+      .addCase(fetchUserListedEquipment.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
   }
 });
+
+export const selectUserListedEquipment = (state) => ({
+  userListedEquipment: state?.equipments?.userListedEquipment || [],
+  loading: state?.equipment?.loading || false
+});
+
 
 export const { clearEquipmentState, clearCurrentOffer } = equipmentsSlice.actions;
 export default equipmentsSlice.reducer;

@@ -1,37 +1,21 @@
+"use client";
+
 import Header from "@/components/homepage/header";
+import { useState, useEffect }  from 'react';
 import EquipmentCard from '@/components/MyListings/EquipmentCard';
 import Footer from '@/components/homepage/footer';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserListedEquipment, selectUserListedEquipment } from "@/redux/reducers/equipmentReducer";
 const ListingsPage = () => {
-    const listings = [
-      {
-        id: 1,
-        title: "Steel Pipelines Cables",
-        location: "Port Harcourt, Rumukola",
-        unreadOffers: 2,
-        totalOffers: 24,
-        cost: "20,000,000",
-        isNegotiable: true,
-        make: "Port Harcourt, Rumukola",
-        brand: "Port Harcourt, Rumukola",
-        color: "Port Harcourt, Rumukola",
-        yearOfManufacture: "Port Harcourt, Rumukola"
-      },
+  const dispatch = useDispatch();
+  const { userListedEquipment: listings, loading } = useSelector(selectUserListedEquipment);
+
+  useEffect(() => {
+    dispatch(fetchUserListedEquipment());
+  }, [dispatch]);
   
-      {
-        id: 2,
-        title: "Steel Pipelines Cables",
-        location: "Port Harcourt, Rumukola",
-        unreadOffers: 2,
-        totalOffers: 24,
-        cost: "20,000,000",
-        isNegotiable: true,
-        make: "Port Harcourt, Rumukola",
-        brand: "Port Harcourt, Rumukola",
-        color: "Port Harcourt, Rumukola",
-        yearOfManufacture: "Port Harcourt, Rumukola"
-      }
-    ];
-  
+    
+  console.log('The listing data:', listings);
     return (
       <div>
       <div className="min-h-screen bg-gray-50">
