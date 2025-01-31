@@ -213,7 +213,7 @@ export default function Card() {
                         <div className="flex flex-col space-y-1">
                             <div className="flex justify-between">
                             <div className="text-sm sm:text-sm font-bold text-gray-800">
-                                {card.amount}
+                            ₦  {card.amount}
                             </div>
                             <div className=''>
                                 <p>per/day</p>

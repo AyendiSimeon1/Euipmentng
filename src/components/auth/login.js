@@ -36,7 +36,7 @@ const Login = () => {
       if (loginUser.fulfilled.match(resultAction)) {
         saveUserData(resultAction.payload);
         toast.success(resultAction.payload.message);
-        router.push('/settings');
+        router.push('/');
       }
       if (loginUser.rejected.match(resultAction)) {
         const errorMessage = resultAction.payload?.message || 'Login failed';

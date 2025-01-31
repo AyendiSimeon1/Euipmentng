@@ -137,6 +137,7 @@ export const fetchUserFavorites = createAsyncThunk(
         }
       );
       return response.data;
+      console.log('The response', response.data);
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
